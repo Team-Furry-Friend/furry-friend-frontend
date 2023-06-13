@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Bevan } from 'next/font/google';
+import { Suspense } from 'react';
+import AuthMenus from '@/components/lists/AuthMenus';
 
 const font = Bevan({
   weight: '400',
@@ -15,6 +17,10 @@ const Header = () => {
             Furry Friend
           </Link>
         </h1>
+
+        <Suspense>
+          <AuthMenus />
+        </Suspense>
       </div>
     </header>
   );
