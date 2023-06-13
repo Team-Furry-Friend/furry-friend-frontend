@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Bevan } from 'next/font/google';
 import { Suspense } from 'react';
 import AuthMenus from '@/components/lists/AuthMenus';
+import AuthMenusSkeleton from '@/components/skeletons/AuthMenusSkeleton';
 
 const font = Bevan({
   weight: '400',
@@ -18,7 +19,7 @@ const Header = () => {
           </Link>
         </h1>
 
-        <Suspense>
+        <Suspense fallback={<AuthMenusSkeleton />}>
           <AuthMenus />
         </Suspense>
       </div>
