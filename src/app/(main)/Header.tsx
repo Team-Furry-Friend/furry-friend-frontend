@@ -6,7 +6,7 @@ const font = Bevan({
   subsets: ['latin'],
 });
 
-const Header = async () => {
+const Header = () => {
   return (
     <header className='shadow'>
       <div className='max-w-5xl mx-auto p-2 md:p-4 flex justify-between'>
