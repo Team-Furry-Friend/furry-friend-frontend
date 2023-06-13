@@ -11,6 +11,12 @@ export const metadata: Metadata = {
     default: 'Furry Friend',
   },
   description: 'Furry Friend Description',
+  openGraph: {
+    title: {
+      template: '%s | Furry Friend',
+      default: 'Furry Friend',
+    },
+  },
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
