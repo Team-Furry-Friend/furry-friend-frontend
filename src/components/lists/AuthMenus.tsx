@@ -6,7 +6,7 @@ const AuthMenus = async () => {
   const cookieStore = cookies();
 
   return (
-    <ul>
+    <ul className='flex gap-4'>
       {authMenus.map(menu => (
         <li key={menu.title}>
           <Link href={menu.href}>{menu.title}</Link>
