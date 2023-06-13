@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { authMenus } from '@/libs/const';
+import { authMenus } from '@/libs/menuData';
 import LogoutBtn from '@/components/buttons/LogoutBtn';
 
 const AuthMenus = async () => {
