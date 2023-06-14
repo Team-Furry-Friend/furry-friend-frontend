@@ -22,19 +22,42 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
       <label className='flex flex-col gap-2'>
-        <span>이메일</span>
+        <div className='flex justify-between'>
+          <span>이메일</span>
+          {errors.email && (
+            <span className='text-red-400'>{errors.email.message}</span>
+          )}
+        </div>
         <input
           type='email'
-          {...register('email')}
+          {...register('email', {
+            required: '이메일을 입력해주세요.',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: '정확한 이메일을 입력해주세요.',
+            },
+          })}
           className='border rounded p-2'
+          placeholder='example@gmail.com'
         />
       </label>
 
       <label className='flex flex-col gap-2'>
-        <span>비밀번호</span>
+        <div className='flex justify-between'>
+          <span>비밀번호</span>
+          {errors.password && (
+            <span className='text-red-400'>{errors.password.message}</span>
+          )}
+        </div>
         <input
           type='password'
-          {...register('password')}
+          {...register('password', {
+            required: '비밀번호를 입력해주세요.',
+            minLength: {
+              value: 6,
+              message: '최소 6글자 이상 입력해주세요.',
+            },
+          })}
           className='border rounded p-2'
         />
       </label>
