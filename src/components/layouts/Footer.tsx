@@ -10,7 +10,7 @@ const font = Bevan({
 const Footer = () => {
   return (
     <footer className='bg-gray-100'>
-      <div className='max-w-5xl mx-auto p-2 md:p-4 flex flex-col gap-4'>
+      <div className='max-w-5xl mx-auto px-2 md:px-4 py-8 flex flex-col gap-4 items-start'>
         <div className='flex gap-4 items-center'>
           <div className={`flex gap-4 items-center ${font.className}`}>
             <Image
@@ -30,6 +30,7 @@ const Footer = () => {
         <Link
           href={'https://github.com/kkukileon305/furry-friend'}
           target='_blank'
+          className='hover:underline'
         >
           GitHub
         </Link>
