@@ -17,7 +17,9 @@ const LoginForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<LoginFields> = async fields => {};
+  const onSubmit: SubmitHandler<LoginFields> = async fields => {
+    setIsLoading(true);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>

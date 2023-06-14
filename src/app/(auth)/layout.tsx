@@ -32,7 +32,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
           {children}
 
-          <Link href={'/'} className='text-center'>
+          <Link href={'/'} className='w-fit mx-auto'>
             메인으로 돌아가기
           </Link>
         </div>
