@@ -126,7 +126,9 @@ const RegisterForm = () => {
             required: true,
           })}
         />
-        <span className={errors.agreement ? 'underline' : ''}>
+        <span
+          className={errors.agreement ? 'underline underline-offset-4' : ''}
+        >
           <Link
             href={'/privacy'}
             className='text-blue-400 font-bold'
