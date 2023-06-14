@@ -13,7 +13,7 @@ const font = Bevan({
 const Header = () => {
   return (
     <header className='shadow sticky top-0 bg-white'>
-      <div className='max-w-5xl mx-auto p-2 md:p-4 flex justify-between items-center'>
+      <div className='max-w-6xl mx-auto p-2 md:p-4 flex justify-between items-center'>
         <h1>
           <Link
             className={`${font.className} text-xl flex gap-4 items-center`}
