@@ -23,53 +23,98 @@ const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<RegisterFields> = async fields => {
+    setIsLoading(true);
+
     console.log(fields);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
       <label className='flex flex-col gap-2'>
-        <span>이메일</span>
+        <div className='flex justify-between'>
+          <span>이메일</span>
+          {errors.email && (
+            <span className='text-red-400'>{errors.email.message}</span>
+          )}
+        </div>
         <input
           type='email'
-          {...register('email')}
+          {...register('email', {
+            required: '이메일을 입력해주세요.',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: '정확한 이메일을 입력해주세요.',
+            },
+          })}
           className='border rounded p-2'
           placeholder='example@gmail.com'
         />
       </label>
 
       <label className='flex flex-col gap-2'>
-        <span>비밀번호</span>
+        <div className='flex justify-between'>
+          <span>비밀번호</span>
+          {errors.password && (
+            <span className='text-red-400'>{errors.password.message}</span>
+          )}
+        </div>
         <input
           type='password'
-          {...register('password')}
+          {...register('password', {
+            required: '비밀번호를 입력해주세요.',
+            minLength: {
+              value: 6,
+              message: '최소 6글자 이상 입력해주세요.',
+            },
+          })}
           className='border rounded p-2'
         />
       </label>
 
       <label className='flex flex-col gap-2'>
-        <span>이름</span>
+        <div className='flex justify-between'>
+          <span>이름</span>
+          {errors.name && (
+            <span className='text-red-400'>{errors.name.message}</span>
+          )}
+        </div>
         <input
           type='text'
-          {...register('name')}
+          {...register('name', {
+            required: '이름을 입력해주세요.',
+          })}
           className='border rounded p-2'
         />
       </label>
 
       <label className='flex flex-col gap-2'>
-        <span>주소</span>
+        <div className='flex justify-between'>
+          <span>주소</span>
+          {errors.address && (
+            <span className='text-red-400'>{errors.address.message}</span>
+          )}
+        </div>
         <input
           type='text'
-          {...register('address')}
+          {...register('address', {
+            required: '주소를 입력해주세요.',
+          })}
           className='border rounded p-2'
         />
       </label>
 
       <label className='flex flex-col gap-2'>
-        <span>휴대폰 번호</span>
+        <div className='flex justify-between'>
+          <span>휴대폰 번호</span>
+          {errors.phone && (
+            <span className='text-red-400'>{errors.phone.message}</span>
+          )}
+        </div>
         <input
           type='text'
-          {...register('phone')}
+          {...register('phone', {
+            required: '휴대폰 번호를 입력해주세요.',
+          })}
           className='border rounded p-2'
         />
       </label>
@@ -81,7 +126,7 @@ const RegisterForm = () => {
             required: true,
           })}
         />
-        <span>
+        <span className={errors.agreement ? 'underline' : ''}>
           <Link
             href={'/privacy'}
             className='text-blue-400 font-bold'
