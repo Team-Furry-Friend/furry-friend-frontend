@@ -9,6 +9,7 @@ type RegisterFields = {
   name: string;
   address: string;
   phone: string;
+  agreement: boolean;
 };
 
 const RegisterForm = () => {
@@ -20,7 +21,9 @@ const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<RegisterFields> = async fields => {};
+  const onSubmit: SubmitHandler<RegisterFields> = async fields => {
+    console.log(fields);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
@@ -67,6 +70,20 @@ const RegisterForm = () => {
           {...register('phone')}
           className='border rounded p-2'
         />
+      </label>
+
+      <label className='flex gap-2 cursor-pointer'>
+        <input
+          type='checkbox'
+          {...register('agreement', {
+            required: true,
+          })}
+        />
+        <span>
+          <strong className='text-blue-400'>이용약관</strong> 및{' '}
+          <strong className='text-blue-400'>개인정보 처리방침</strong>에
+          동의합니다.
+        </span>
       </label>
 
       <button
