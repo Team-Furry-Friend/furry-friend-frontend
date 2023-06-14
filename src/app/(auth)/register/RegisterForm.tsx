@@ -2,6 +2,7 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
+import Link from 'next/link';
 
 type RegisterFields = {
   email: string;
@@ -33,6 +34,7 @@ const RegisterForm = () => {
           type='email'
           {...register('email')}
           className='border rounded p-2'
+          placeholder='example@gmail.com'
         />
       </label>
 
@@ -80,9 +82,22 @@ const RegisterForm = () => {
           })}
         />
         <span>
-          <strong className='text-blue-400'>이용약관</strong> 및{' '}
-          <strong className='text-blue-400'>개인정보 처리방침</strong>에
-          동의합니다.
+          <Link
+            href={'/privacy'}
+            className='text-blue-400 font-bold'
+            target='_blank'
+          >
+            이용약관
+          </Link>{' '}
+          및{' '}
+          <Link
+            href={'/terms-of-service'}
+            className='text-blue-400 font-bold'
+            target='_blank'
+          >
+            개인정보 처리방침
+          </Link>
+          에 동의합니다.
         </span>
       </label>
 
