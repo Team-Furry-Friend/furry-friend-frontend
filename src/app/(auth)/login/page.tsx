@@ -10,9 +10,12 @@ const Page = () => {
   return (
     <>
       <LoginForm />
-      <Link href={'/register'} className='text-center'>
-        회원가입
-      </Link>
+      <div className='flex justify-center gap-4'>
+        <p>처음이신가요?</p>
+        <Link href={'/register'} className='text-center text-blue-400'>
+          회원가입
+        </Link>
+      </div>
     </>
   );
 };
