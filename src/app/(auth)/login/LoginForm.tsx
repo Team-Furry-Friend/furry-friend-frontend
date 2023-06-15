@@ -8,7 +8,7 @@ import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
 
 type LoginFields = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -48,13 +48,13 @@ const LoginForm = () => {
       <label className='flex flex-col gap-2'>
         <div className='flex justify-between'>
           <span>이메일</span>
-          {errors.email && (
-            <span className='text-red-400'>{errors.email.message}</span>
+          {errors.username && (
+            <span className='text-red-400'>{errors.username.message}</span>
           )}
         </div>
         <input
           type='email'
-          {...register('email', {
+          {...register('username', {
             required: '이메일을 입력해주세요.',
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -78,8 +78,8 @@ const LoginForm = () => {
           {...register('password', {
             required: '비밀번호를 입력해주세요.',
             minLength: {
-              value: 6,
-              message: '최소 6글자 이상 입력해주세요.',
+              value: 4,
+              message: '최소 4글자 이상 입력해주세요.',
             },
           })}
           className='border rounded p-2'
