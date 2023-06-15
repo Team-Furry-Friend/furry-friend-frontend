@@ -30,6 +30,7 @@ const LoginForm = () => {
       await api.post('/member/login', fields);
 
       router.refresh();
+      // TODO: 쿠키 확인후 middleware protected 설정해야함
     } catch (e) {
       setModal(
         <NoticeModal
