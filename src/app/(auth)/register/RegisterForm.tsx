@@ -40,7 +40,7 @@ const RegisterForm = () => {
             '회원가입에 성공하였습니다.',
             '입력하신 정보로 로그인 해주세요.',
           ]}
-          onClose={() => router.push('/register')}
+          onClose={() => router.push('/login')}
         />
       );
     } catch (e) {
@@ -84,8 +84,8 @@ const RegisterForm = () => {
           {...register('mpw', {
             required: '비밀번호를 입력해주세요.',
             minLength: {
-              value: 6,
-              message: '최소 6글자 이상 입력해주세요.',
+              value: 4,
+              message: '최소 4글자 이상 입력해주세요.',
             },
           })}
           className='border rounded p-2'
