@@ -27,7 +27,10 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      await api.post('/member/login', fields);
+      await api.post(
+        `/member/login?username=${fields.username}&password=${fields.password}`,
+        fields
+      );
 
       router.refresh();
       // TODO: 쿠키 확인후 middleware protected 설정해야함
