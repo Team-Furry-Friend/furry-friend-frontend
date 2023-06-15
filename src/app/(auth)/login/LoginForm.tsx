@@ -31,7 +31,14 @@ const LoginForm = () => {
 
       router.refresh();
     } catch (e) {
-      setModal(<NoticeModal texts={['로그인에 실패했습니다.']} />);
+      setModal(
+        <NoticeModal
+          texts={[
+            '로그인에 실패했습니다.',
+            '입력하신 정보를 다시 확인해주세요.',
+          ]}
+        />
+      );
       setIsLoading(false);
     }
   };
