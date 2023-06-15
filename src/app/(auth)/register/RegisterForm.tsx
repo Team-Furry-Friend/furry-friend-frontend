@@ -3,10 +3,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Link from 'next/link';
+import { api } from '@/libs/api';
+import { useModal } from '@/store/modalStore';
+import NoticeModal from '@/components/modals/NoticeModal';
+import { useRouter } from 'next/navigation';
 
 type RegisterFields = {
   email: string;
-  password: string;
+  mpw: string;
   name: string;
   address: string;
   phone: string;
@@ -14,18 +18,35 @@ type RegisterFields = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFields>();
 
+  const setModal = useModal(s => s.setModal);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<RegisterFields> = async fields => {
     setIsLoading(true);
 
-    console.log(fields);
+    try {
+      await api.post('/member/join', fields);
+
+      setModal(
+        <NoticeModal
+          texts={[
+            '회원가입에 성공하였습니다.',
+            '입력하신 정보로 로그인 해주세요.',
+          ]}
+          onClose={() => router.push('/register')}
+        />
+      );
+    } catch (e) {
+      setModal(<NoticeModal texts={['회원가입에 실패했습니다.']} />);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,13 +75,13 @@ const RegisterForm = () => {
       <label className='flex flex-col gap-2'>
         <div className='flex justify-between'>
           <span>비밀번호</span>
-          {errors.password && (
-            <span className='text-red-400'>{errors.password.message}</span>
+          {errors.mpw && (
+            <span className='text-red-400'>{errors.mpw.message}</span>
           )}
         </div>
         <input
           type='password'
-          {...register('password', {
+          {...register('mpw', {
             required: '비밀번호를 입력해주세요.',
             minLength: {
               value: 6,
