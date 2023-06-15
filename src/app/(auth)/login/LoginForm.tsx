@@ -2,6 +2,10 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { api } from '@/libs/api';
+import NoticeModal from '@/components/modals/NoticeModal';
+import { useModal } from '@/store/modalStore';
+import { useRouter } from 'next/navigation';
 
 type LoginFields = {
   email: string;
@@ -9,6 +13,7 @@ type LoginFields = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,9 +21,19 @@ const LoginForm = () => {
   } = useForm<LoginFields>();
 
   const [isLoading, setIsLoading] = useState(false);
+  const setModal = useModal(s => s.setModal);
 
   const onSubmit: SubmitHandler<LoginFields> = async fields => {
     setIsLoading(true);
+
+    try {
+      await api.post('/member/login', fields);
+
+      router.refresh();
+    } catch (e) {
+      setModal(<NoticeModal texts={['로그인에 실패했습니다.']} />);
+      setIsLoading(false);
+    }
   };
 
   return (
