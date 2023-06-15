@@ -3,6 +3,7 @@
 import { useModal } from '@/store/modalStore';
 import { MouseEventHandler } from 'react';
 
+// If you want to add close button, create any html element with id='close'
 const Modal = () => {
   const { modal, setModal } = useModal();
 
