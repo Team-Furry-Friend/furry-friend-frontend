@@ -8,7 +8,7 @@ type Policy = {
   contents: Content[];
 };
 
-export const policies: Policy[] = [
+export const privacy: Policy[] = [
   {
     title: '1 개인정보의 처리 목적',
     contents: [
