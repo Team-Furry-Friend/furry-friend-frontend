@@ -1,14 +1,9 @@
 import { ReactNode } from 'react';
 import { create } from 'zustand';
 
-type Modal = {
-  title: string;
-  content: ReactNode;
-};
-
 type ModalStore = {
-  modal: Modal | null;
-  setModal: (modal: Modal | null) => void;
+  modal: ReactNode | null;
+  setModal: (modal: ReactNode | null) => void;
 };
 
 export const useModal = create<ModalStore>(set => ({
