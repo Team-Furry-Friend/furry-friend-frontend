@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+import Modal from '@/components/layouts/Modal';
 
 const baseFont = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='kr'>
-      <body className={baseFont.className}>{children}</body>
+      <body className={baseFont.className}>
+        <Modal />
+        {children}
+      </body>
     </html>
   );
 };
