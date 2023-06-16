@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { api } from '@/libs/api';
 
 export async function middleware(request: NextRequest) {
   // TODO: Protected Route 로직 추가 in Login, Register 페이지
@@ -13,7 +12,7 @@ export async function middleware(request: NextRequest) {
 
     const { status } = await response.json();
 
-    if (status === 'true') {
+    if (status === 'success') {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
