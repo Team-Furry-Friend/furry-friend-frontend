@@ -6,6 +6,8 @@ import { api } from '@/libs/api';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
+import { LoginResponse } from '@/types';
+import Cookies from 'js-cookie';
 
 type LoginFields = {
   username: string;
@@ -27,13 +29,18 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      await api.post(
+      const {
+        data: { data: access_token },
+      } = await api.post<LoginResponse>(
         `/member/login?username=${fields.username}&password=${fields.password}`,
         fields
       );
 
+      Cookies.set('access_token', access_token, {
+        expires: 7,
+      });
+
       router.refresh();
-      // TODO: 쿠키 확인후 middleware protected 설정해야함
     } catch (e) {
       setModal(
         <NoticeModal
