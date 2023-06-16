@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  // TODO: Protected Route 로직 추가 in Login, Register 페이지
   const at = request.cookies.get('access_token')?.value;
 
   if (at) {
@@ -10,9 +9,9 @@ export async function middleware(request: NextRequest) {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
     );
 
-    const { status } = await response.json();
+    const body = await response.json();
 
-    if (status === 'success') {
+    if (body.status === 'success') {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
