@@ -40,6 +40,7 @@ const LoginForm = () => {
         expires: 7,
       });
 
+      router.push('/');
       router.refresh();
     } catch (e) {
       setModal(
