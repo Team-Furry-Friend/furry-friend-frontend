@@ -4,3 +4,9 @@ export interface LoginResponse {
   message: string;
   data: string;
 }
+
+export interface RegisterResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+}

@@ -7,6 +7,7 @@ import { api } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useRouter } from 'next/navigation';
+import { RegisterResponse } from '@/types';
 
 type RegisterFields = {
   email: string;
@@ -32,7 +33,7 @@ const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      const { data } = await api.post('/member/join', fields);
+      const { data } = await api.post<RegisterResponse>('/member/join', fields);
 
       if (data.status === 'fail') {
         throw new Error(data.message);
