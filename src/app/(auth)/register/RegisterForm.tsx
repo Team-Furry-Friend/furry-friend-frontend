@@ -32,7 +32,11 @@ const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      await api.post('/member/join', fields);
+      const { data } = await api.post('/member/join', fields);
+
+      if (data.status === 'fail') {
+        throw new Error(data.message);
+      }
 
       setModal(
         <NoticeModal
@@ -44,7 +48,7 @@ const RegisterForm = () => {
       );
       router.push('/login');
     } catch (e) {
-      setModal(<NoticeModal texts={['회원가입에 실패했습니다.']} />);
+      setModal(<NoticeModal texts={['이미 가입된 회원입니다.']} />);
       setIsLoading(false);
     }
   };
