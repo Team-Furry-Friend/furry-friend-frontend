@@ -40,9 +40,9 @@ const RegisterForm = () => {
             '회원가입에 성공하였습니다.',
             '입력하신 정보로 로그인 해주세요.',
           ]}
-          onClose={() => router.push('/login')}
         />
       );
+      router.push('/login');
     } catch (e) {
       setModal(<NoticeModal texts={['회원가입에 실패했습니다.']} />);
       setIsLoading(false);
