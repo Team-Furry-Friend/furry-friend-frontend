@@ -16,8 +16,6 @@ const AuthMenus = async () => {
     const body = await response.json();
 
     if (body.status === 'success') {
-      console.log('at - authmenus', body.status);
-
       return <LogoutBtn at={at} />;
     }
   }
