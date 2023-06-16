@@ -21,6 +21,7 @@ const LogoutBtn = ({ at }: { at: string }) => {
     });
 
     router.refresh();
+    router.push('/login');
   };
 
   return <button onClick={onClick}>로그아웃</button>;
