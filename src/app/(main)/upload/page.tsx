@@ -21,7 +21,7 @@ const Page = async () => {
     return <Auth />;
   }
 
-  return <UploadForm />;
+  return <UploadForm at={at} />;
 };
 
 export default Page;
