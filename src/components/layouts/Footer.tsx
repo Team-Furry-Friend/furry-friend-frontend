@@ -11,8 +11,10 @@ const Footer = () => {
   return (
     <footer className='bg-gray-100'>
       <div className='max-w-6xl mx-auto px-2 md:px-4 py-8 flex flex-col gap-4 items-start'>
-        <div className='flex gap-4 items-center'>
-          <div className={`flex gap-4 items-center ${font.className}`}>
+        <div className='flex flex-wrap gap-4 items-center'>
+          <div
+            className={`w-full md:w-fit flex gap-4 items-center ${font.className}`}
+          >
             <Image
               src='/icons/chinchilla.png'
               alt='logo'
@@ -22,7 +24,7 @@ const Footer = () => {
             />
             <p className='block'>Furry Friend</p>
           </div>
-          <div className='w-[1px] h-4 bg-gray-400' />
+          <div className='hidden md:block w-[1px] h-4 bg-gray-400' />
           <Link href={'/terms-of-service'}>이용약관</Link>
           <div className='w-[1px] h-4 bg-gray-400' />
           <Link href={'/privacy'}>개인정보 처리방침</Link>
