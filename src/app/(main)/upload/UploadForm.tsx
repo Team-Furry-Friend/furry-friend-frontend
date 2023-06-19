@@ -89,7 +89,11 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
       router.push('/');
     } catch (e) {
       setIsLoading(false);
+      setModal(<NoticeModal texts={['상품 등록에 실패하였습니다!']} />);
     }
+
+    router.refresh();
+    router.push('/');
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
@@ -120,6 +124,7 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
     }
 
     setFiles([...files, ...filteredFile]);
+    e.target.value = '';
   };
 
   return (
