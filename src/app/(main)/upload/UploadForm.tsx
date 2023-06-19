@@ -32,7 +32,6 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
     handleSubmit,
     register,
     formState: { errors },
-    setValue,
   } = useForm<UploadFields>({
     defaultValues: {
       access_token: at,

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { MdRemove } from 'react-icons/md';
 
 const ImageList = ({
