@@ -1,6 +1,7 @@
 import UploadBtn from '@/components/buttons/UploadBtn';
 import ProductList from '@/components/lists/ProductList';
 import { Suspense } from 'react';
+import ProductListSkeleton from '@/components/skeletons/ProductListSkeleton';
 
 const Page = () => {
   return (
@@ -9,9 +10,10 @@ const Page = () => {
         <h2>Furry Friend</h2>
       </div>
 
-      <div className='max-w-6xl mx-auto p-2 md:p-4 flex flex-col items-center gap-8'>
-        <h2 className='w-full font-bold text-2xl'>최근 등록된 상품들</h2>
-        <Suspense fallback={<div>Loading...</div>}>
+      <div className='max-w-6xl mx-auto p-2 md:p-4'>
+        <h2 className='w-full font-bold text-2xl my-8'>최근 등록된 상품들</h2>
+
+        <Suspense fallback={<ProductListSkeleton />}>
           <ProductList />
         </Suspense>
       </div>
