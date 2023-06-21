@@ -12,7 +12,7 @@ const ProductList = async () => {
 
   return (
     <>
-      <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'>
+      <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
         {dtoList.map(item => (
           <ProductItem item={item} key={item.pid} />
         ))}
