@@ -1,6 +1,7 @@
 const Loading = () => {
   return (
     <div className='w-full flex flex-col gap-8'>
+      <div className='w-8 h-8 bg-gray-200 rounded-full animate-pulse' />
       <div className='w-32 h-8 bg-gray-200 rounded animate-pulse' />
 
       <div className='flex flex-col gap-4'>
