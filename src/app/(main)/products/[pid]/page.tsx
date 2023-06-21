@@ -42,6 +42,8 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       </Link>
 
       <p className='text-gray-400'>{data.pcategory}</p>
+
+      <p>{data.mname}</p>
       <h2 className='font-bold text-xl'>{data.pname}</h2>
       <p className='mb-4'>{data.pprice}원</p>
 
@@ -57,7 +59,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
                 alt={img.imgName}
                 width={480}
                 height={480}
-                className='w-full rounded border aspect-square object-contain'
+                className='w-full rounded aspect-square object-contain'
               />
             </li>
           ))}

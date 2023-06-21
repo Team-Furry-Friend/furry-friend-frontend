@@ -58,6 +58,7 @@ export interface Detail {
   pid: number;
   pcategory: string;
   pname: string;
+  mname: string;
   pexplain: string;
   pprice: number;
   del: boolean;
