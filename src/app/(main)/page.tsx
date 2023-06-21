@@ -3,6 +3,8 @@ import ProductList from '@/components/lists/ProductList';
 import { Suspense } from 'react';
 import ProductListSkeleton from '@/components/skeletons/ProductListSkeleton';
 
+export const revalidate = 0;
+
 const Page = () => {
   return (
     <>
