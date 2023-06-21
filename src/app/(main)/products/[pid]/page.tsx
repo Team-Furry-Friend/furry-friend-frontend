@@ -1,16 +1,19 @@
 import { ProductDetailResponse } from '@/types';
 import Image from 'next/image';
+import { api } from '@/libs/api';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
-  const response = await fetch(
+  const {
+    data: { data },
+  } = await api.get<ProductDetailResponse>(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/detail?pid=${params.pid}`
   );
-  const { data } = (await response.json()) as ProductDetailResponse;
 
   return (
     <div className='flex flex-col gap-2'>
       <p className='text-gray-400'>{data.pcategory}</p>
       <h2 className='font-bold text-xl'>{data.pname}</h2>
+      <p className='mb-4'>{data.pprice}원</p>
 
       {data.imageDTOList.length !== 0 && (
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'>
@@ -30,6 +33,8 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           ))}
         </ul>
       )}
+
+      <p className='break-all'>{data.pexplain}</p>
     </div>
   );
 };

@@ -92,8 +92,8 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
       setModal(<NoticeModal texts={['상품 등록에 실패하였습니다!']} />);
     }
 
-    router.refresh();
     router.push('/');
+    router.refresh();
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
