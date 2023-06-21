@@ -43,6 +43,12 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<UploadFields> = async fields => {
+    if (files.length === 0) {
+      setModal(<NoticeModal texts={['사진을 하나 이상 업로드해주세요!']} />);
+
+      return;
+    }
+
     setIsLoading(true);
 
     try {
