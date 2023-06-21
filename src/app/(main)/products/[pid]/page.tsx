@@ -1,8 +1,31 @@
 import { ProductDetailResponse } from '@/types';
 import Image from 'next/image';
 import { api } from '@/libs/api';
+import Link from 'next/link';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { cookies } from 'next/headers';
+import Auth from '@/components/layouts/Auth';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
+  const cookieStore = cookies();
+  const at = cookieStore.get('access_token')?.value;
+
+  if (!at) {
+    return <Auth />;
+  }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
+  );
+
+  const body = await response.json();
+
+  const isValid = body.status === 'success';
+
+  if (!isValid) {
+    return <Auth />;
+  }
+
   const {
     data: { data },
   } = await api.get<ProductDetailResponse>(
@@ -10,7 +33,14 @@ const Page = async ({ params }: { params: { pid: string } }) => {
   );
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='w-full flex flex-col gap-2'>
+      <Link href={'/'} className='block w-fit mb-4'>
+        <AiOutlineArrowLeft
+          size={32}
+          className='border border-black rounded-full p-1'
+        />
+      </Link>
+
       <p className='text-gray-400'>{data.pcategory}</p>
       <h2 className='font-bold text-xl'>{data.pname}</h2>
       <p className='mb-4'>{data.pprice}원</p>
