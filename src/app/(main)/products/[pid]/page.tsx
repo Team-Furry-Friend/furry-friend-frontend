@@ -41,10 +41,12 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         />
       </Link>
 
-      <p className='text-gray-400'>{data.pcategory}</p>
+      <button className='text-gray-400 p-2 border rounded w-fit'>
+        {data.pcategory}
+      </button>
 
       <p>{data.mname}</p>
-      <h2 className='font-bold text-xl'>{data.pname}</h2>
+      <h2 className='font-bold text-2xl'>{data.pname}</h2>
       <p className='mb-4'>{data.pprice}원</p>
 
       {data.imageDTOList.length !== 0 && (

@@ -9,6 +9,7 @@ import ImageList from '@/app/(main)/upload/ImageList';
 import { MdImage } from 'react-icons/md';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
+import { categories } from '@/datas/menuData';
 
 type Image = {
   imgName: string;
@@ -32,9 +33,11 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
     handleSubmit,
     register,
     formState: { errors },
+    watch,
   } = useForm<UploadFields>({
     defaultValues: {
       access_token: at,
+      pcategory: '사료',
     },
   });
 
@@ -138,22 +141,29 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
       onSubmit={handleSubmit(onSubmit)}
       className='w-full flex flex-col gap-4'
     >
-      <label className='flex flex-col gap-2'>
-        <div className='flex justify-between'>
-          <span>카테고리</span>
-          {errors.pcategory && (
-            <span className='text-red-400'>{errors.pcategory.message}</span>
-          )}
-        </div>
-        <input
-          type='text'
-          {...register('pcategory', {
-            required: '카테고리를 입력해주세요.',
-          })}
-          className='border rounded p-2'
-          placeholder='카테고리'
-        />
-      </label>
+      <ul className='flex gap-2 mb-4'>
+        {categories.map(category => (
+          <li key={category}>
+            <label>
+              <span
+                className={`p-2 border rounded cursor-pointer ${
+                  watch('pcategory') === category
+                    ? 'border-blue-400 bg-blue-400 text-white'
+                    : 'bg-white text-gray-400 hover:bg-blue-200'
+                }`}
+              >
+                {category}
+              </span>
+              <input
+                type='radio'
+                {...register('pcategory')}
+                value={category}
+                hidden
+              />
+            </label>
+          </li>
+        ))}
+      </ul>
 
       <label className='flex flex-col gap-2'>
         <div className='flex justify-between'>

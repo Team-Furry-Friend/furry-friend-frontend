@@ -13,3 +13,5 @@ export const authMenus: Menu[] = [
     href: '/register',
   },
 ];
+
+export const categories = ['사료', '간식', '용품', '의류'] as const;
