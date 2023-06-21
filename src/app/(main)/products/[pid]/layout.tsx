@@ -1,6 +1,4 @@
 import { ReactNode } from 'react';
-import Link from 'next/link';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
