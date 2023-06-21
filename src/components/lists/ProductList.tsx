@@ -1,6 +1,4 @@
 import { ProductListResponse } from '@/types';
-import Image from 'next/image';
-import Link from 'next/link';
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import ProductItem from '@/components/items/ProductItem';
 

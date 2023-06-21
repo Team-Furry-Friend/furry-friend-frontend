@@ -1,10 +1,8 @@
 'use client';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { DtoList, ProductData, ProductListResponse } from '@/types';
+import { DtoList, ProductListResponse } from '@/types';
 import { api } from '@/libs/api';
-import Link from 'next/link';
-import Image from 'next/image';
 import ProductItem from '@/components/items/ProductItem';
 
 const InfiniteScroll = () => {
