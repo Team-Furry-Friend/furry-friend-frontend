@@ -1,10 +1,12 @@
-import { ProductDetailResponse } from '@/types';
+import { BasketResponse, ProductDetailResponse, TokenResponse } from '@/types';
 import Image from 'next/image';
 import { api } from '@/libs/api';
 import Link from 'next/link';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineArrowLeft } from 'react-icons/ai';
 import { cookies } from 'next/headers';
 import Auth from '@/components/layouts/Auth';
+import { IoMenuOutline } from 'react-icons/io5';
+import LikeBtn from '@/components/buttons/LikeBtn';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();
@@ -14,11 +16,11 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     return <Auth />;
   }
 
-  const response = await fetch(
+  const tokenResponse = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
   );
 
-  const body = await response.json();
+  const body = (await tokenResponse.json()) as TokenResponse;
 
   const isValid = body.status === 'success';
 
@@ -26,10 +28,24 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     return <Auth />;
   }
 
-  const {
-    data: { data },
-  } = await api.get<ProductDetailResponse>(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/detail?pid=${params.pid}`
+  const [
+    {
+      data: { data: detail },
+    },
+    {
+      data: { data: baskets },
+    },
+  ] = await Promise.all([
+    api.get<ProductDetailResponse>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/detail?pid=${params.pid}`
+    ),
+    api.get<BasketResponse>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`
+    ),
+  ]);
+
+  const userBaskets = baskets?.filter(
+    basket => basket.mid === body.data?.memberId
   );
 
   return (
@@ -41,17 +57,35 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         />
       </Link>
 
-      <button className='text-gray-400 p-2 border rounded w-fit'>
-        {data.pcategory}
-      </button>
+      <div className='flex justify-between items-center'>
+        <button className='text-gray-400 p-2 border rounded w-fit'>
+          {detail.pcategory}
+        </button>
 
-      <p>{data.mname}</p>
-      <h2 className='font-bold text-2xl'>{data.pname}</h2>
-      <p className='mb-4'>{data.pprice}원</p>
+        <div className='relative group'>
+          <IoMenuOutline
+            className='rounded cursor-pointer bg-white group-hover:bg-gray-200'
+            size={32}
+          />
+          <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block'>
+            <li>
+              <LikeBtn
+                basket={userBaskets?.find(basket => basket.pid === detail.pid)}
+                at={at}
+                pid={detail.pid}
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
 
-      {data.imageDTOList.length !== 0 && (
+      <p>{detail.mname}</p>
+      <h2 className='font-bold text-2xl'>{detail.pname}</h2>
+      <p className='mb-4'>{detail.pprice}원</p>
+
+      {detail.imageDTOList.length !== 0 && (
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'>
-          {data.imageDTOList.map(img => (
+          {detail.imageDTOList.map(img => (
             <li
               key={img.imgName}
               className='w-[calc(50%-4px)] md:w-[calc((100%-48px)/4)]'
@@ -68,7 +102,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         </ul>
       )}
 
-      <p className='break-all'>{data.pexplain}</p>
+      <p className='break-all py-4'>{detail.pexplain}</p>
     </div>
   );
 };

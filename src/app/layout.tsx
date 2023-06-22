@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='kr'>
-      <body className={baseFont.className}>
+      <body className={`${baseFont.className} bg-white`}>
         <Modal />
         {children}
       </body>
