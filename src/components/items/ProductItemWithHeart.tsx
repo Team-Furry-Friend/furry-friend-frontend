@@ -28,15 +28,10 @@ const ProductItemWithHeart = ({
             />
           )}
 
-          {isLike ? (
+          {isLike && (
             <AiFillHeart
               size={32}
               className='text-red-400 absolute right-1 bottom-1'
-            />
-          ) : (
-            <AiOutlineHeart
-              size={32}
-              className='text-white absolute right-1 bottom-1'
             />
           )}
         </div>
