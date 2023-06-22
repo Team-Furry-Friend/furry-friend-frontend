@@ -1,11 +1,12 @@
 'use client';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { DtoList, ProductListResponse } from '@/types';
+import { Datum, DtoList, ProductListResponse } from '@/types';
 import { api } from '@/libs/api';
 import ProductItem from '@/components/items/ProductItem';
+import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 
-const InfiniteScroll = () => {
+const InfiniteScroll = ({ userBaskets }: { userBaskets?: Datum[] }) => {
   const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
       api
@@ -21,7 +22,17 @@ const InfiniteScroll = () => {
     <>
       <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'>
         {postsGroup.map(posts =>
-          posts.map(item => <ProductItem item={item} key={item.pid} />)
+          posts.map(item =>
+            userBaskets ? (
+              <ProductItemWithHeart
+                item={item}
+                key={item.pid}
+                isLike={userBaskets.some(basket => basket.pid === item.pid)}
+              />
+            ) : (
+              <ProductItem item={item} key={item.pid} />
+            )
+          )
         )}
       </ul>
 

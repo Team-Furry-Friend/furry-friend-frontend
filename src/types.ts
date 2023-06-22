@@ -67,3 +67,25 @@ export interface Detail {
   modDate: Date;
   imageDTOList: ImageDTOList[];
 }
+
+export interface BasketResponse {
+  statusCode: number;
+  status?: string;
+  message?: string;
+  data?: Datum[];
+}
+
+export interface Datum {
+  bid: number;
+  pid: number;
+  mid: number;
+}
+
+export interface TokenResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data?: {
+    memberId: number;
+  };
+}
