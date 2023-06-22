@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { DtoList } from '@/types';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 
 const ProductItemWithHeart = ({
   item,
