@@ -52,24 +52,24 @@ const EditForm = ({ at, memberId, detail }: EditFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<UploadFields> = async fields => {
+    const { imageDTOList, access_token, ...fieldsWithoutImage } = fields;
+
     setIsLoading(true);
 
     try {
-      await api.post('/products', {
-        productDTO: fields,
+      await api.patch('/products', {
+        productDTO: fieldsWithoutImage,
         jwtRequest: {
           access_token: at,
         },
       });
 
-      router.push('/');
+      router.push(`/products/${detail.pid}`);
+      router.refresh();
     } catch (e) {
       setIsLoading(false);
       setModal(<NoticeModal texts={['상품 등록에 실패하였습니다!']} />);
     }
-
-    router.push('/');
-    router.refresh();
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async e => {

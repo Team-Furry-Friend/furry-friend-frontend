@@ -50,18 +50,12 @@ const LikeBtn = ({ basket, at, pid }: LikeBtnProps) => {
     <button
       disabled={isLoading}
       onClick={onClick}
-      className='w-32 flex items-center gap-2 p-2 bg-white disabled:bg-gray-200 hover:bg-gray-200'
+      className='mx-auto rounded flex items-center gap-2 p-1 bg-white disabled:bg-gray-200 hover:bg-gray-200'
     >
       {basket ? (
-        <>
-          <AiFillHeart size={24} className='text-red-400' />
-          <p className='w-fit'>찜 했어요</p>
-        </>
+        <AiFillHeart size={24} className='text-red-400' />
       ) : (
-        <>
-          <AiOutlineHeart size={24} className='text-red-400' />
-          <p className='w-fit'>찜 하기</p>
-        </>
+        <AiOutlineHeart size={24} className='text-red-400' />
       )}
     </button>
   );

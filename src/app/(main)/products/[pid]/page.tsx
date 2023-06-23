@@ -83,21 +83,20 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           {detail.pcategory}
         </button>
 
-        <div className='relative group'>
-          <IoMenuOutline
-            className='rounded cursor-pointer bg-white group-hover:bg-gray-200'
-            size={32}
+        <div className='flex justify-between gap-2 items-center'>
+          <LikeBtn
+            basket={userBaskets?.find(basket => basket.pid === detail.pid)}
+            at={at}
+            pid={detail.pid}
           />
-          <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block'>
-            <li>
-              <LikeBtn
-                basket={userBaskets?.find(basket => basket.pid === detail.pid)}
-                at={at}
-                pid={detail.pid}
+
+          {tokenBody.data?.memberId === detail.mid && (
+            <div className='relative group'>
+              <IoMenuOutline
+                className='rounded cursor-pointer bg-white group-hover:bg-gray-200'
+                size={32}
               />
-            </li>
-            {tokenBody.data?.memberId === detail.mid && (
-              <>
+              <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block'>
                 <li>
                   <RemoveBtn pid={detail.pid} at={at} />
                 </li>
@@ -110,9 +109,9 @@ const Page = async ({ params }: { params: { pid: string } }) => {
                     <p>수정하기</p>
                   </Link>
                 </li>
-              </>
-            )}
-          </ul>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -121,7 +120,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       <p className='mb-4'>{detail.pprice}원</p>
 
       {detail.imageDTOList.length !== 0 && (
-        <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'>
+        <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 justify-center'>
           {detail.imageDTOList.map(img => (
             <li
               key={img.imgName}
