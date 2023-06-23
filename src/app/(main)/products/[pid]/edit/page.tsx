@@ -47,7 +47,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       </Link>
 
       <h2 className='font-bold text-2xl'>상품 등록</h2>
-      <EditForm at={at} memberId={tokenBody.data.memberId} pid={detail.pid} />
+      <EditForm at={at} memberId={tokenBody.data.memberId} detail={detail} />
     </div>
   );
 };

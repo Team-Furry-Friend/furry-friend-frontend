@@ -3,13 +3,18 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ChangeEventHandler, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, supabase } from '@/libs/api';
+import { api } from '@/libs/api';
 import Image from 'next/image';
-import ImageList from '@/app/(main)/upload/ImageList';
-import { MdImage } from 'react-icons/md';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { categories } from '@/datas/menuData';
+import { Detail } from '@/types';
+
+interface EditFormProps {
+  detail: Detail;
+  at: string;
+  memberId: string;
+}
 
 type Image = {
   imgName: string;
@@ -26,15 +31,7 @@ type UploadFields = {
   pid: number;
 };
 
-const EditForm = ({
-  at,
-  memberId,
-  pid,
-}: {
-  at: string;
-  memberId: number;
-  pid: number;
-}) => {
+const EditForm = ({ at, memberId, detail }: EditFormProps) => {
   const router = useRouter();
   const setModal = useModal(s => s.setModal);
 
@@ -46,7 +43,7 @@ const EditForm = ({
   } = useForm<UploadFields>({
     defaultValues: {
       access_token: at,
-      pcategory: '사료',
+      ...detail,
     },
   });
 
@@ -59,12 +56,7 @@ const EditForm = ({
 
     try {
       await api.post('/products', {
-        productDTO: {
-          pcategory: fields.pcategory,
-          pname: fields.pname,
-          pexplain: fields.pexplain,
-          pprice: fields.pprice,
-        },
+        productDTO: fields,
         jwtRequest: {
           access_token: at,
         },
@@ -160,23 +152,22 @@ const EditForm = ({
       <div>
         <h2>이미지</h2>
 
-        <ImageList files={files} setFiles={setFiles} />
-
-        <label>
-          <div className='flex justify-center'>
-            <MdImage
-              size={48}
-              className='hover:bg-gray-200 cursor-pointer rounded-full p-2'
-            />
-          </div>
-          <input
-            type='file'
-            multiple
-            accept='image/*'
-            hidden
-            onChange={onChange}
-          />
-        </label>
+        <ul className='flex gap-4 flex-wrap'>
+          {detail.imageDTOList.map(image => (
+            <li
+              key={image.imgName}
+              className='w-[calc(50%-8px)] md:w-[calc((100%-48px)/4)] flex justify-center relative rounded-xl overflow-hidden'
+            >
+              <Image
+                src={image.path}
+                alt={image.imgName}
+                width={160}
+                height={160}
+                className='w-full aspect-square object-contain'
+              />
+            </li>
+          ))}
+        </ul>
       </div>
 
       <label className='flex flex-col gap-2'>
