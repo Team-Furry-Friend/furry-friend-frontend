@@ -37,7 +37,7 @@ const ImageList = ({
             alt={file.name}
             width={160}
             height={160}
-            className='w-full aspect-square object-cover'
+            className='w-full aspect-square object-contain'
           />
 
           <MdRemove
