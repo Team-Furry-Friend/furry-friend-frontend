@@ -1,11 +1,11 @@
 'use client';
 
-interface NoticeModal {
+interface NoticeModalProps {
   texts: string[];
   onClose?: () => void;
 }
 
-const NoticeModal = ({ onClose, texts }: NoticeModal) => {
+const NoticeModal = ({ onClose, texts }: NoticeModalProps) => {
   return (
     <div className='flex flex-col'>
       <div className='p-2 md:p-4 flex flex-col gap-4 items-center'>
