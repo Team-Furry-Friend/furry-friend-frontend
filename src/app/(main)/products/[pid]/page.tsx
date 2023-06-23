@@ -2,11 +2,12 @@ import { BasketResponse, ProductDetailResponse, TokenResponse } from '@/types';
 import Image from 'next/image';
 import { api } from '@/libs/api';
 import Link from 'next/link';
-import { AiFillHeart, AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { cookies } from 'next/headers';
 import Auth from '@/components/layouts/Auth';
 import { IoMenuOutline } from 'react-icons/io5';
 import LikeBtn from '@/components/buttons/LikeBtn';
+import RemoveBtn from '@/components/buttons/RemoveBtn';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();
@@ -20,9 +21,9 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
   );
 
-  const body = (await tokenResponse.json()) as TokenResponse;
+  const tokenBody = (await tokenResponse.json()) as TokenResponse;
 
-  const isValid = body.status === 'success';
+  const isValid = tokenBody.status === 'success';
 
   if (!isValid) {
     return <Auth />;
@@ -44,8 +45,27 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     ),
   ]);
 
+  if (detail.del) {
+    return (
+      <div className='min-h-[calc(100dvh-80px)] md:min-h-[calc(100dvh-96px)] max-w-2xl w-full flex justify-center items-center'>
+        <div className='border rounded flex flex-col items-center gap-4 p-4 w-full'>
+          <p className='font-bold text-xl text-center'>
+            판매자가 삭제한 상품입니다.
+          </p>
+
+          <Link
+            href={'/'}
+            className='w-fit p-2 rounded font-bold text-white bg-blue-400'
+          >
+            메인으로 가기
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const userBaskets = baskets?.filter(
-    basket => basket.mid === body.data?.memberId
+    basket => basket.mid === tokenBody.data?.memberId
   );
 
   return (
@@ -75,6 +95,11 @@ const Page = async ({ params }: { params: { pid: string } }) => {
                 pid={detail.pid}
               />
             </li>
+            {tokenBody.data?.memberId === detail.mid && (
+              <li>
+                <RemoveBtn pid={detail.pid} at={at} />
+              </li>
+            )}
           </ul>
         </div>
       </div>
