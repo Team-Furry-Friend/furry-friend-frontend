@@ -3,33 +3,32 @@ import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import ProductItem from '@/components/items/ProductItem';
 import { cookies } from 'next/headers';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
+import { api } from '@/libs/api';
 
 const ProductList = async () => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
-  const [productListResponse, basketsResponse, tokenResponse] =
-    await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`, {
-        next: {
-          revalidate: false,
-        },
-      }),
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`),
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`),
-    ]);
-
   const [
     {
-      data: { dtoList },
+      data: {
+        data: { dtoList },
+      },
     },
-    { data: baskets },
-    { data: memberData },
-  ] = (await Promise.all([
-    productListResponse.json(),
+    basketsResponse,
+    tokenResponse,
+  ] = await Promise.all([
+    api.get<ProductListResponse>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`
+    ),
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`),
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`),
+  ]);
+
+  const [{ data: baskets }, { data: memberData }] = (await Promise.all([
     basketsResponse.json(),
     tokenResponse.json(),
-  ])) as [ProductListResponse, BasketResponse, TokenResponse];
+  ])) as [BasketResponse, TokenResponse];
 
   if (!memberData || !baskets) {
     return (
