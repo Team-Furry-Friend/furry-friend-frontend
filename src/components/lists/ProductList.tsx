@@ -10,7 +10,11 @@ const ProductList = async () => {
 
   const [productListResponse, basketsResponse, tokenResponse] =
     await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`),
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`, {
+        next: {
+          revalidate: false,
+        },
+      }),
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`),
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`),
     ]);
@@ -31,9 +35,11 @@ const ProductList = async () => {
     return (
       <>
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
-          {dtoList.map(item => (
-            <ProductItem item={item} key={item.pid} />
-          ))}
+          {dtoList
+            .filter(item => !item.del)
+            .map(item => (
+              <ProductItem item={item} key={item.pid} />
+            ))}
         </ul>
 
         <InfiniteScroll />

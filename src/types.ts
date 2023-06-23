@@ -28,6 +28,7 @@ export interface ProductData {
   prev: boolean;
   next: boolean;
   pageList: number[];
+  del: boolean;
 }
 
 export interface DtoList {

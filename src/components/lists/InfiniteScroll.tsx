@@ -2,18 +2,17 @@
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Datum, DtoList, ProductListResponse } from '@/types';
-import { api } from '@/libs/api';
 import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 
 const InfiniteScroll = ({ userBaskets }: { userBaskets?: Datum[] }) => {
   const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
-      api
-        .get<ProductListResponse>(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=${page}&size=16`
-        )
-        .then(r => r.data.data.dtoList),
+      fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=${page}&size=16`
+      )
+        .then(r => r.json() as Promise<ProductListResponse>)
+        .then(r => r.data.dtoList.filter(item => !item.del)),
     initialPage: 2,
     viewPerPage: 16,
   });
