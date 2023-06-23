@@ -8,6 +8,7 @@ import Auth from '@/components/layouts/Auth';
 import { IoMenuOutline } from 'react-icons/io5';
 import LikeBtn from '@/components/buttons/LikeBtn';
 import RemoveBtn from '@/components/buttons/RemoveBtn';
+import { BsFillPencilFill } from 'react-icons/bs';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();
@@ -96,9 +97,20 @@ const Page = async ({ params }: { params: { pid: string } }) => {
               />
             </li>
             {tokenBody.data?.memberId === detail.mid && (
-              <li>
-                <RemoveBtn pid={detail.pid} at={at} />
-              </li>
+              <>
+                <li>
+                  <RemoveBtn pid={detail.pid} at={at} />
+                </li>
+                <li>
+                  <Link
+                    href={`${detail.pid}/edit`}
+                    className='w-32 flex items-center gap-2 p-2 bg-white disabled:bg-gray-200 hover:bg-gray-200'
+                  >
+                    <BsFillPencilFill size={24} />
+                    <p>수정하기</p>
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </div>
