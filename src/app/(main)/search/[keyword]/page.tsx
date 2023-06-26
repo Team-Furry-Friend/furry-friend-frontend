@@ -9,7 +9,9 @@ const Page = ({
 }) => {
   return (
     <div className='w-full'>
-      <h2 className='font-bold text-2xl my-4'>검색</h2>
+      <h2 className='font-bold text-2xl my-4'>
+        &apos;{decodeURIComponent(params.keyword)}&apos; 검색
+      </h2>
 
       <InfiniteScroll keyword={params.keyword} />
     </div>
