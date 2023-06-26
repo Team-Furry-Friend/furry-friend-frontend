@@ -9,13 +9,24 @@ import { api } from '@/libs/api';
 interface InfiniteScrollProps {
   userBaskets?: Datum[];
   initialPage?: number;
+  type?: string;
+  keyword?: string;
 }
 
-const InfiniteScroll = ({ userBaskets, initialPage }: InfiniteScrollProps) => {
+const InfiniteScroll = ({
+  userBaskets,
+  initialPage,
+  keyword,
+  type,
+}: InfiniteScrollProps) => {
   const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
       api
-        .get<ProductListResponse>(`/products?page=${page}&size=16`)
+        .get<ProductListResponse>(
+          `/products?page=${page}&size=16${
+            keyword ? `&keyword=${keyword}` : ''
+          }${type ? `&type=${type}` : ''}`
+        )
         .then(r => r.data.data.dtoList.filter(item => !item.del)),
     initialPage: initialPage || 1,
     viewPerPage: 16,
