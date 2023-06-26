@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import AuthMenus from '@/components/lists/AuthMenus';
 import AuthMenusSkeleton from '@/components/skeletons/AuthMenusSkeleton';
 import Image from 'next/image';
-import { BsSearch } from 'react-icons/bs';
 import SearchBtn from '@/components/buttons/SearchBtn';
 
 const font = Bevan({
