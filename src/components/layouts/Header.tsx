@@ -5,6 +5,7 @@ import AuthMenus from '@/components/lists/AuthMenus';
 import AuthMenusSkeleton from '@/components/skeletons/AuthMenusSkeleton';
 import Image from 'next/image';
 import SearchBtn from '@/components/buttons/SearchBtn';
+import CategoryList from '@/components/lists/CategoryList';
 
 const font = Bevan({
   weight: '400',
@@ -31,7 +32,8 @@ const Header = () => {
           </Link>
         </h1>
 
-        <div className='flex gap-4 items-center'>
+        <div className='flex items-center h-12 md:h-16'>
+          <CategoryList />
           <SearchBtn />
 
           <Suspense fallback={<AuthMenusSkeleton />}>
