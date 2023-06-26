@@ -16,7 +16,7 @@ const SearchModal = () => {
     if (keyword.length === 0) return;
 
     setModal(null);
-    router.push(`/search?keyword=${keyword}`);
+    router.push(`/search/${keyword}`);
   };
 
   return (
@@ -33,13 +33,13 @@ const SearchModal = () => {
         </div>
       </div>
       <div className='flex mt-4'>
-        <button
+        <span
           id='close'
-          className='w-full bg-red-400 py-2 font-bold text-white'
+          className='w-full bg-red-400 py-2 font-bold text-white flex justify-center items-center cursor-pointer'
           onClick={e => e.preventDefault()}
         >
           닫기
-        </button>
+        </span>
         <button className='w-full bg-blue-400 py-2 font-bold text-white'>
           검색하기
         </button>

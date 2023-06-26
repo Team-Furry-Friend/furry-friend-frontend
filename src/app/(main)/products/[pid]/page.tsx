@@ -86,9 +86,12 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       </Link>
 
       <div className='flex justify-between items-center'>
-        <button className='text-gray-400 p-2 border rounded w-fit'>
+        <Link
+          href={`/category/${detail.pcategory}`}
+          className='text-gray-400 p-2 border rounded w-fit'
+        >
           {detail.pcategory}
-        </button>
+        </Link>
 
         <div className='flex justify-between gap-2 items-center'>
           <LikeBtn
