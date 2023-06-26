@@ -1,4 +1,9 @@
-import { BasketResponse, ProductDetailResponse, TokenResponse } from '@/types';
+import {
+  BasketResponse,
+  CommentResponse,
+  ProductDetailResponse,
+  TokenResponse,
+} from '@/types';
 import Image from 'next/image';
 import { api } from '@/libs/api';
 import Link from 'next/link';
@@ -9,6 +14,8 @@ import { IoMenuOutline } from 'react-icons/io5';
 import LikeBtn from '@/components/buttons/LikeBtn';
 import RemoveBtn from '@/components/buttons/RemoveBtn';
 import { BsFillPencilFill } from 'react-icons/bs';
+import CommentForm from '@/app/(main)/products/[pid]/CommentForm';
+import CommentList from '@/app/(main)/products/[pid]/CommentList';
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();
@@ -37,13 +44,13 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     {
       data: { data: baskets },
     },
+    {
+      data: { data: comments },
+    },
   ] = await Promise.all([
-    api.get<ProductDetailResponse>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/detail?pid=${params.pid}`
-    ),
-    api.get<BasketResponse>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`
-    ),
+    api.get<ProductDetailResponse>(`/products/detail?pid=${params.pid}`),
+    api.get<BasketResponse>(`/baskets/member/${at}`),
+    api.get<CommentResponse>(`/reviews/${params.pid}`),
   ]);
 
   if (detail.del) {
@@ -139,6 +146,11 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       )}
 
       <p className='break-all py-4'>{detail.pexplain}</p>
+
+      <div className='bg-gray-200 h-[1px] mb-8' />
+
+      <CommentForm at={at} pid={params.pid} />
+      <CommentList comments={comments} />
     </div>
   );
 };
