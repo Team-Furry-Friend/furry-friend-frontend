@@ -90,3 +90,21 @@ export interface TokenResponse {
     memberId: number;
   };
 }
+
+export interface CommentResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: Comment[];
+}
+
+export interface Comment {
+  rid: number;
+  pid: number;
+  mid: number;
+  nickname: null;
+  email: null;
+  text: string;
+  regDate: Date;
+  modDate: Date;
+}
