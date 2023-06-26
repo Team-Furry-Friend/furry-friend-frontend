@@ -4,6 +4,8 @@ import { Suspense } from 'react';
 import AuthMenus from '@/components/lists/AuthMenus';
 import AuthMenusSkeleton from '@/components/skeletons/AuthMenusSkeleton';
 import Image from 'next/image';
+import { BsSearch } from 'react-icons/bs';
+import SearchBtn from '@/components/buttons/SearchBtn';
 
 const font = Bevan({
   weight: '400',
@@ -30,9 +32,13 @@ const Header = () => {
           </Link>
         </h1>
 
-        <Suspense fallback={<AuthMenusSkeleton />}>
-          <AuthMenus />
-        </Suspense>
+        <div className='flex gap-4 items-center'>
+          <SearchBtn />
+
+          <Suspense fallback={<AuthMenusSkeleton />}>
+            <AuthMenus />
+          </Suspense>
+        </div>
       </div>
     </header>
   );
