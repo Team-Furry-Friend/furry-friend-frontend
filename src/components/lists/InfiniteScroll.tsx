@@ -6,15 +6,18 @@ import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 import { api } from '@/libs/api';
 
-const InfiniteScroll = ({ userBaskets }: { userBaskets?: Datum[] }) => {
+interface InfiniteScrollProps {
+  userBaskets?: Datum[];
+  initialPage?: number;
+}
+
+const InfiniteScroll = ({ userBaskets, initialPage }: InfiniteScrollProps) => {
   const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
       api
-        .get<ProductListResponse>(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=${page}&size=16`
-        )
+        .get<ProductListResponse>(`/products?page=${page}&size=16`)
         .then(r => r.data.data.dtoList.filter(item => !item.del)),
-    initialPage: 2,
+    initialPage: initialPage || 1,
     viewPerPage: 16,
   });
 

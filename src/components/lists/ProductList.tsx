@@ -41,7 +41,7 @@ const ProductList = async () => {
             ))}
         </ul>
 
-        <InfiniteScroll />
+        <InfiniteScroll initialPage={2} />
       </>
     );
   }
@@ -62,7 +62,7 @@ const ProductList = async () => {
         ))}
       </ul>
 
-      <InfiniteScroll userBaskets={userBaskets} />
+      <InfiniteScroll userBaskets={userBaskets} initialPage={2} />
     </>
   );
 };

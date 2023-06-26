@@ -102,7 +102,7 @@ export interface Comment {
   rid: number;
   pid: number;
   mid: number;
-  nickname: null;
+  nickname: string;
   email: null;
   text: string;
   regDate: Date;
