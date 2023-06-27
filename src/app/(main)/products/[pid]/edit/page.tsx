@@ -6,6 +6,33 @@ import { api } from '@/libs/api';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { pid: string };
+}): Promise<Metadata> => {
+  const {
+    data: { data: detail },
+  } = await api.get<ProductDetailResponse>(
+    `/products/detail?pid=${params.pid}`
+  );
+
+  return {
+    title: detail.pname,
+    description: detail.pexplain,
+    openGraph: {
+      title: detail.pname,
+      description: detail.pexplain,
+      images: detail.imageDTOList.map(item => item.path),
+    },
+    twitter: {
+      title: detail.pname,
+      images: detail.imageDTOList.map(item => item.path),
+    },
+  };
+};
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();

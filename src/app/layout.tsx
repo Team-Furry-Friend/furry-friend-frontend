@@ -18,6 +18,12 @@ export const metadata: Metadata = {
       default: 'Furry Friend',
     },
   },
+  twitter: {
+    title: {
+      template: '%s | Furry Friend',
+      default: 'Furry Friend',
+    },
+  },
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

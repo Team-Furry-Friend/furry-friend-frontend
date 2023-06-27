@@ -2,8 +2,11 @@ const Loading = () => {
   return (
     <div className='w-full flex flex-col gap-4'>
       <div className='w-8 h-8 bg-gray-200 rounded-full animate-pulse mb-4' />
-      <div className='w-24 h-11 bg-gray-200 rounded animate-pulse' />
-      <div className='w-24 h-4 bg-gray-200 rounded animate-pulse' />
+      <div className='w-24 h-10 bg-gray-200 rounded animate-pulse' />
+      <div className='flex gap-4'>
+        <div className='w-12 h-4 bg-gray-200 rounded animate-pulse' />
+        <div className='w-16 h-4 bg-gray-200 rounded animate-pulse' />
+      </div>
       <div className='w-36 h-6 bg-gray-200 rounded animate-pulse' />
       <div className='w-24 h-4 bg-gray-200 rounded animate-pulse' />
 

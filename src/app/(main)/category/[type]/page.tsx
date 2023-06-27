@@ -1,5 +1,21 @@
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
+import { Metadata } from 'next';
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { type: string };
+}): Promise<Metadata> => {
+  return {
+    title: `${decodeURIComponent(params.type)} - 카테고리`,
+    openGraph: {
+      title: `${decodeURIComponent(params.type)} - 카테고리`,
+    },
+    twitter: {
+      title: `${decodeURIComponent(params.type)} - 카테고리`,
+    },
+  };
+};
 const Page = ({
   params,
 }: {

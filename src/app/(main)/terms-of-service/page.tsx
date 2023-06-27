@@ -1,4 +1,15 @@
 import { privacies } from '@/datas/policy';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '이용약관',
+  openGraph: {
+    title: '이용약관',
+  },
+  twitter: {
+    title: '이용약관',
+  },
+};
 
 const Page = () => {
   return (

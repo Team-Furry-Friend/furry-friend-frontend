@@ -16,6 +16,34 @@ import RemoveBtn from '@/components/buttons/RemoveBtn';
 import { BsFillPencilFill } from 'react-icons/bs';
 import CommentForm from '@/app/(main)/products/[pid]/CommentForm';
 import CommentList from '@/app/(main)/products/[pid]/CommentList';
+import { getDateDiff } from '@/libs/getDateDiff';
+import { Metadata } from 'next';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { pid: string };
+}): Promise<Metadata> => {
+  const {
+    data: { data: detail },
+  } = await api.get<ProductDetailResponse>(
+    `/products/detail?pid=${params.pid}`
+  );
+
+  return {
+    title: detail.pname,
+    description: detail.pexplain,
+    openGraph: {
+      title: detail.pname,
+      description: detail.pexplain,
+      images: detail.imageDTOList.map(item => item.path),
+    },
+    twitter: {
+      title: detail.pname,
+      images: detail.imageDTOList.map(item => item.path),
+    },
+  };
+};
 
 const Page = async ({ params }: { params: { pid: string } }) => {
   const cookieStore = cookies();
@@ -125,7 +153,10 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         </div>
       </div>
 
-      <p>{detail.mname}</p>
+      <div className='flex gap-4 mb-4'>
+        <p>{detail.mname}</p>
+        <p>{getDateDiff(detail.regDate)}</p>
+      </div>
       <h2 className='font-bold text-2xl'>{detail.pname}</h2>
       <p className='mb-4'>{detail.pprice}원</p>
 
