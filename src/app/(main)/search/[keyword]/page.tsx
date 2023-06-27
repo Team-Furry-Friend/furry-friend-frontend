@@ -1,5 +1,7 @@
-import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import { Metadata } from 'next';
+import List from '@/app/(main)/search/[keyword]/List';
+import { Suspense } from 'react';
+import ProductListSkeleton from '@/components/skeletons/ProductListSkeleton';
 
 export const generateMetadata = async ({
   params,
@@ -27,10 +29,12 @@ const Page = ({
   return (
     <div className='w-full'>
       <h2 className='font-bold text-2xl my-4'>
-        &apos;{decodeURIComponent(params.keyword)}&apos; 검색
+        {decodeURIComponent(params.keyword)}
       </h2>
 
-      <InfiniteScroll keyword={params.keyword} />
+      <Suspense fallback={<ProductListSkeleton />}>
+        <List keyword={params.keyword} />
+      </Suspense>
     </div>
   );
 };

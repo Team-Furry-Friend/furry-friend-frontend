@@ -1,5 +1,7 @@
-import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import ProductListSkeleton from '@/components/skeletons/ProductListSkeleton';
+import List from './List';
 
 export const generateMetadata = async ({
   params,
@@ -29,7 +31,9 @@ const Page = ({
         {decodeURIComponent(params.type)}
       </h2>
 
-      <InfiniteScroll type={params.type} />
+      <Suspense fallback={<ProductListSkeleton />}>
+        <List type={params.type} />
+      </Suspense>
     </div>
   );
 };

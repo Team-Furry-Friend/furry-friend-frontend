@@ -50,14 +50,6 @@ const InfiniteScroll = ({
         )}
       </ul>
 
-      {postsGroup.length > 0 && postsGroup[0].length === 0 && (
-        <div>
-          <p className='text-center font-bold text-xl'>
-            해당하는 상품이 없습니다.
-          </p>
-        </div>
-      )}
-
       <ul
         className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'
         ref={spinnerRef}
