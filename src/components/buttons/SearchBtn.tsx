@@ -14,7 +14,7 @@ const SearchBtn = () => {
   return (
     <button
       onClick={onClick}
-      className='h-full flex gap-2 px-4 items-center bg-white hover:bg-gray-200 mr-2'
+      className='h-full flex gap-2 px-2 md:px-4 items-center bg-white hover:bg-gray-200'
     >
       <BsSearch size={20} />
       <span className='hidden md:block'>검색</span>
