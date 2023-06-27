@@ -2,13 +2,19 @@
 
 import { useRouter } from 'next/navigation';
 import { BsSearch } from 'react-icons/bs';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import { useModal } from '@/store/modalStore';
 
 const SearchModal = () => {
   const router = useRouter();
   const setModal = useModal(s => s.setModal);
   const [keyword, setKeyword] = useState('');
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
@@ -25,6 +31,7 @@ const SearchModal = () => {
         <h2 className='font-bold text-xl'>검색하기</h2>
         <div className='p-2 border rounded-full flex gap-4 items-center'>
           <input
+            ref={inputRef}
             onChange={e => setKeyword(e.target.value)}
             type='text'
             className='w-full'
