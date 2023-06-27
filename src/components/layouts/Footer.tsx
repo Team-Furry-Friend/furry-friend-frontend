@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Bevan } from 'next/font/google';
 import Link from 'next/link';
+import { BsGithub } from 'react-icons/bs';
 
 const font = Bevan({
   weight: '400',
@@ -28,28 +29,30 @@ const Footer = () => {
           <Link href={'/terms-of-service'}>이용약관</Link>
           <div className='w-[1px] h-4 bg-gray-400' />
           <Link href={'/privacy'}>개인정보 처리방침</Link>
-          <div className='w-[1px] h-4 bg-gray-400' />
-          <div className='flex gap-2'>
-            <Link
-              target='_blank'
-              href='https://icons8.com/icon/IXOBYgTqGhdq/chinchilla'
-            >
-              Chinchilla
-            </Link>
-            icon by
-            <Link target='_blank' href='https://icons8.com'>
-              Icons8
-            </Link>
-          </div>
         </div>
 
-        <Link
-          href={'https://github.com/kkukileon305/furry-friend'}
-          target='_blank'
-          className='hover:underline'
-        >
-          GitHub
-        </Link>
+        <div className='flex gap-2'>
+          <Link
+            target='_blank'
+            href='https://icons8.com/icon/IXOBYgTqGhdq/chinchilla'
+          >
+            Chinchilla
+          </Link>
+          icon by
+          <Link target='_blank' href='https://icons8.com'>
+            Icons8
+          </Link>
+        </div>
+
+        <div className='w-full flex justify-end'>
+          <Link
+            href={'https://github.com/kkukileon305/furry-friend'}
+            target='_blank'
+            className='hover:underline'
+          >
+            <BsGithub size={32} />
+          </Link>
+        </div>
       </div>
     </footer>
   );
