@@ -3,13 +3,18 @@ import UploadForm from '@/app/(main)/upload/UploadForm';
 import Auth from '@/components/layouts/Auth';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Upload',
+};
 
 const Page = async () => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
   if (!at) {
-    return <Auth />;
+    return <Auth type='upload' />;
   }
 
   const response = await fetch(
@@ -21,7 +26,7 @@ const Page = async () => {
   const isValid = body.status === 'success';
 
   if (!isValid) {
-    return <Auth />;
+    return <Auth type='upload' />;
   }
 
   return (
