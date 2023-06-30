@@ -116,7 +116,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       <div className='flex justify-between items-center'>
         <Link
           href={`/category/${detail.pcategory}`}
-          className='text-gray-400 p-2 border rounded w-fit'
+          className='text-gray-400 p-2 border rounded w-fit bg-white'
         >
           {detail.pcategory}
         </Link>
