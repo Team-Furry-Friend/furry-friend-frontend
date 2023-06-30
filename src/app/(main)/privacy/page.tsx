@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const Page = () => {
   return (
-    <div className='max-w-6xl mx-auto p-2 md:p-4'>
+    <div className='center'>
       <h2 className='font-bold text-2xl my-8'>개인정보 처리방침</h2>
 
       <div className='bg-gray-200 p-2 rounded'>

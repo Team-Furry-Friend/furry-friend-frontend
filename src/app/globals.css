@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer  {
+@layer base  {
 	input:focus {
 		@apply outline-none;
 	}
@@ -11,3 +11,10 @@
 		@apply whitespace-pre-wrap break-words;
 	}
 }
+
+@layer components {
+	.center {
+		@apply max-w-6xl mx-auto p-2 md:p-4;
+	}
+}
+
