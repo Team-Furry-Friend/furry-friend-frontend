@@ -6,4 +6,8 @@
 	input:focus {
 		@apply outline-none;
 	}
+
+	p {
+		@apply whitespace-pre-wrap break-words;
+	}
 }

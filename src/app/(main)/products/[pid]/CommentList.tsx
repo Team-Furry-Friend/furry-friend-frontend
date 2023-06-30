@@ -11,7 +11,7 @@ const CommentList = ({ comments }: { comments: Comment[] }) => {
             <p>{getDateDiff(comment.regDate)}</p>
           </div>
 
-          <p className='whitespace-pre'>{comment.text}</p>
+          <p className='whitespace-pre-wrap break-words'>{comment.text}</p>
         </li>
       ))}
     </ul>
