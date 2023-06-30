@@ -108,3 +108,24 @@ export interface Comment {
   regDate: Date;
   modDate: Date;
 }
+
+export interface PopularityResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: Popularity[];
+}
+
+export interface Popularity {
+  pid: number;
+  pcategory: string;
+  pname: string;
+  pexplain: string;
+  pprice: number;
+  del: boolean;
+  mid: number;
+  regDate: Date;
+  modDate: Date;
+  imageDTOList: ImageDTOList[];
+  mname: null;
+}
