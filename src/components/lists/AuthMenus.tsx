@@ -16,7 +16,7 @@ const AuthMenus = async () => {
 
     if (body.status === 'success') {
       return (
-        <div className='px-2 md:px-4'>
+        <div className='pl-2 md:pl-4'>
           <LogoutBtn at={at} />
         </div>
       );
