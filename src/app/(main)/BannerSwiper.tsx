@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import BannerNavigation from '@/app/(main)/BannerNavigation';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { getDateDiff } from '@/libs/getDateDiff';
@@ -10,18 +11,20 @@ import { Popularity } from '@/types';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import BannerNavigation from '@/app/(main)/BannerNavigation';
+import { useState } from 'react';
 
 const BannerSwiper = ({ posts }: { posts: Popularity[] }) => {
+  const [curIndex, setCurIndex] = useState(0);
+
   return (
     <Swiper
       modules={[Navigation, Pagination]}
       slidesPerView='auto'
-      loop
       centeredSlides
       autoplay={{
         delay: 30,
       }}
+      onSlideChange={swiper => setCurIndex(swiper.activeIndex)}
     >
       {posts.map(post => (
         <SwiperSlide key={post.pid} className='w-full bg-blue-400'>
@@ -64,7 +67,7 @@ const BannerSwiper = ({ posts }: { posts: Popularity[] }) => {
         </SwiperSlide>
       ))}
 
-      <BannerNavigation posts={posts} />
+      <BannerNavigation posts={posts} curIndex={curIndex} />
     </Swiper>
   );
 };
