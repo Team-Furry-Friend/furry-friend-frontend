@@ -3,27 +3,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BannerNavigation from '@/app/(main)/BannerNavigation';
-import { Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { useState } from 'react';
+import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { getDateDiff } from '@/libs/getDateDiff';
 import { Popularity } from '@/types';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useState } from 'react';
 
 const BannerSwiper = ({ posts }: { posts: Popularity[] }) => {
   const [curIndex, setCurIndex] = useState(0);
 
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[Navigation, Pagination, Autoplay]}
       slidesPerView='auto'
       centeredSlides
-      autoplay={{
-        delay: 30,
-      }}
+      autoplay
       onSlideChange={swiper => setCurIndex(swiper.activeIndex)}
     >
       {posts.map(post => (
