@@ -9,7 +9,7 @@ const CategoryList = () => {
         카테고리
       </button>
 
-      <ul className='absolute hidden group-hover:block bg-white w-20 md:w-24 shadow'>
+      <ul className='absolute hidden group-hover:block bg-white w-20 md:w-24 shadow rounded-b-lg overflow-hidden'>
         {categories.map(category => (
           <li key={category}>
             <Link
