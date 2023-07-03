@@ -16,16 +16,35 @@ const BannerNavigation = ({
   const isClient = useIsClient();
 
   return (
-    <div className='center mt-4 flex flex-row-reverse items-center gap-4'>
+    <div className='relative center mt-4 flex flex-row-reverse items-center gap-4'>
       <div className='w-[67px] flex border border-blue-400 rounded-full overflow-hidden'>
-        <button onClick={() => swiper.slidePrev()}>
-          <BsArrowLeftShort size={32} className='text-blue-400' />
+        <button
+          disabled={curIndex + 1 === 1}
+          onClick={() => swiper.slidePrev()}
+          className='group'
+        >
+          <BsArrowLeftShort
+            size={32}
+            className='text-blue-400 group-disabled:text-gray-200'
+          />
         </button>
         <div className='w-[1px] h-8 bg-blue-400' />
-        <button onClick={() => swiper.slideNext()}>
-          <BsArrowRightShort size={32} className='text-blue-400' />
+        <button
+          disabled={curIndex + 1 === posts.length}
+          onClick={() => swiper.slideNext()}
+          className='group'
+        >
+          <BsArrowRightShort
+            size={32}
+            className='text-blue-400 group-disabled:text-gray-200'
+          />
         </button>
       </div>
+
+      <p className='w-fit absolute z-10 -top-6 md:-top-12 right-2 md:right-4 -translate-y-full text-white'>
+        {curIndex + 1} / {posts.length}
+      </p>
+
       {isClient && (
         <Swiper
           className='w-[calc(100%-96px)]'
