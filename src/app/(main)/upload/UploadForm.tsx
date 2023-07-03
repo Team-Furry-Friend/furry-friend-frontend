@@ -225,14 +225,17 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
             <span className='text-red-400'>{errors.pprice.message}</span>
           )}
         </div>
-        <input
-          type='number'
-          {...register('pprice', {
-            required: '상품 가격을 입력해주세요.',
-          })}
-          className='border rounded p-2'
-          placeholder='11000...'
-        />
+        <div className='flex gap-4 items-center'>
+          <input
+            type='number'
+            {...register('pprice', {
+              required: '상품 가격을 입력해주세요.',
+            })}
+            className='border rounded p-2 w-full'
+            placeholder='11000...'
+          />
+          <p>원</p>
+        </div>
       </label>
 
       <button
