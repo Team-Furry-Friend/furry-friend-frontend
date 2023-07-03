@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s | Furry Friend',
     default: 'Furry Friend',
   },
-  description: 'Furry Friend Description',
+  description: '반려동물 용품 중고 거래',
   openGraph: {
     title: {
       template: '%s | Furry Friend',
