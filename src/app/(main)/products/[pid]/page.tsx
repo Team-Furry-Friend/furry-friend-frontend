@@ -18,6 +18,7 @@ import CommentForm from '@/app/(main)/products/[pid]/CommentForm';
 import CommentList from '@/app/(main)/products/[pid]/CommentList';
 import { getDateDiff } from '@/libs/getDateDiff';
 import { Metadata } from 'next';
+import ShareBtn from '@/components/buttons/ShareBtn';
 
 export const generateMetadata = async ({
   params,
@@ -112,7 +113,6 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           className='border border-black rounded-full p-1'
         />
       </Link>
-
       <div className='flex justify-between items-center'>
         <Link
           href={`/category/${detail.pcategory}`}
@@ -127,6 +127,8 @@ const Page = async ({ params }: { params: { pid: string } }) => {
             at={at}
             pid={detail.pid}
           />
+
+          <ShareBtn />
 
           {tokenBody.data?.memberId === detail.mid && (
             <div className='relative group'>
@@ -152,14 +154,12 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           )}
         </div>
       </div>
-
       <div className='flex gap-4 mb-4'>
         <p>{detail.mname}</p>
         <p>{getDateDiff(detail.regDate)}</p>
       </div>
       <h2 className='font-bold text-2xl'>{detail.pname}</h2>
       <p className='mb-4'>{detail.pprice}원</p>
-
       {detail.imageDTOList.length !== 0 && (
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 justify-center'>
           {detail.imageDTOList.map(img => (
@@ -178,11 +178,9 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           ))}
         </ul>
       )}
-
       <p className='break-all py-4'>{detail.pexplain}</p>
 
       <div className='bg-gray-200 h-[1px] mb-8' />
-
       <CommentForm at={at} pid={params.pid} />
       <CommentList comments={comments} />
     </div>
