@@ -35,7 +35,7 @@ type UploadFields = {
   modDate: Date;
 };
 
-const EditForm = ({ at, memberId, detail }: EditFormProps) => {
+const EditForm = ({ at, detail }: EditFormProps) => {
   const router = useRouter();
   const setModal = useModal(s => s.setModal);
 

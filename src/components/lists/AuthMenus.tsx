@@ -14,7 +14,7 @@ const AuthMenus = async () => {
     if (tokenResponse.status === 'success') {
       return (
         <div className='pl-2 md:pl-4'>
-          <LogoutBtn at={at} />
+          <LogoutBtn />
         </div>
       );
     }
