@@ -2,19 +2,16 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { authMenus } from '@/datas/menuData';
 import LogoutBtn from '@/components/buttons/LogoutBtn';
+import { api, auth } from '@/libs/api';
 
 const AuthMenus = async () => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
   if (at) {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
-    );
+    const tokenResponse = await auth.getToken(at);
 
-    const body = await response.json();
-
-    if (body.status === 'success') {
+    if (tokenResponse.status === 'success') {
       return (
         <div className='pl-2 md:pl-4'>
           <LogoutBtn at={at} />

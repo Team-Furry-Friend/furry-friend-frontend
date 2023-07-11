@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Link from 'next/link';
-import { api } from '@/libs/api';
+import { api, auth } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useRouter } from 'next/navigation';
@@ -33,10 +33,10 @@ const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      const { data } = await api.post<RegisterResponse>('/member/join', fields);
+      const signUpResponse = await auth.signUp(fields);
 
-      if (data.status === 'fail') {
-        throw new Error(data.message);
+      if (signUpResponse.status === 'fail') {
+        throw new Error(signUpResponse.message);
       }
 
       setModal(

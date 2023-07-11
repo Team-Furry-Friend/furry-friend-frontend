@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ChangeEventHandler, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, supabase } from '@/libs/api';
+import { products, supabase } from '@/libs/api';
 import Image from 'next/image';
 import ImageList from '@/app/(main)/upload/ImageList';
 import { MdImage } from 'react-icons/md';
@@ -25,7 +25,12 @@ type UploadFields = {
   imageDTOList: Image[];
 };
 
-const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
+interface UploadFormProps {
+  at: string;
+  memberId: string | number;
+}
+
+const UploadForm = ({ at, memberId }: UploadFormProps) => {
   const router = useRouter();
   const setModal = useModal(s => s.setModal);
 
@@ -79,7 +84,7 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
               .getPublicUrl(res.data?.path as string).data.publicUrl
         );
 
-      await api.post('/products', {
+      await products.post({
         productDTO: {
           pcategory: fields.pcategory,
           pname: fields.pname,
@@ -91,7 +96,7 @@ const UploadForm = ({ at, memberId }: { at: string; memberId: string }) => {
           })),
         },
         jwtRequest: {
-          access_token: at,
+          access_token: `Bearer ${at}`,
         },
       });
 

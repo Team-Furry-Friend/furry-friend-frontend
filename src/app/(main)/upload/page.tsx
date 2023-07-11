@@ -4,6 +4,7 @@ import Auth from '@/components/layouts/Auth';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Metadata } from 'next';
+import { auth } from '@/libs/api';
 
 export const metadata: Metadata = {
   title: 'Upload',
@@ -17,15 +18,11 @@ const Page = async () => {
     return <Auth type='upload' />;
   }
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
-  );
+  const tokenResponse = await auth.getToken(at);
 
-  const body = await response.json();
+  const isValid = tokenResponse.status === 'success';
 
-  const isValid = body.status === 'success';
-
-  if (!isValid) {
+  if (!isValid || !tokenResponse.data) {
     return <Auth type='upload' />;
   }
 
@@ -39,7 +36,7 @@ const Page = async () => {
       </Link>
 
       <h2 className='font-bold text-2xl'>상품 등록</h2>
-      <UploadForm at={at} memberId={body.data.memberId} />
+      <UploadForm at={at} memberId={tokenResponse.data.memberId} />
     </div>
   );
 };

@@ -36,7 +36,7 @@ const ProductItemWithHeart = ({
           )}
         </div>
 
-        <p className='text-gray-400 text-sm'> {item.pcategory}</p>
+        <p className='text-gray-400 text-sm'>{item.pcategory}</p>
         <h4 className='font-bold'>{item.pname}</h4>
         <p>{item.pprice}원</p>
       </Link>

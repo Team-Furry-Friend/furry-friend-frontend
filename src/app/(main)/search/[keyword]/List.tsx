@@ -1,8 +1,6 @@
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
-import { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { api } from '@/libs/api';
-import { BasketResponse, ProductListResponse, TokenResponse } from '@/types';
+import { auth, baskets, products } from '@/libs/api';
 import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 
@@ -10,28 +8,12 @@ const List = async ({ keyword }: { keyword: string }) => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
-  const [
-    {
-      data: {
-        data: { dtoList },
-      },
-    },
-    basketsResponse,
-    tokenResponse,
-  ] = await Promise.all([
-    api.get<ProductListResponse>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16&keyword=${keyword}`
-    ),
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`),
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`),
-  ]);
+  const dtoList = await products.get({
+    page: 1,
+    keyword,
+  });
 
-  const [{ data: baskets }, { data: memberData }] = (await Promise.all([
-    basketsResponse.json(),
-    tokenResponse.json(),
-  ])) as [BasketResponse, TokenResponse];
-
-  if (!memberData || !baskets) {
+  if (!at) {
     return (
       <>
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
@@ -47,8 +29,29 @@ const List = async ({ keyword }: { keyword: string }) => {
     );
   }
 
-  const userBaskets = baskets.filter(
-    basket => basket.mid === memberData.memberId
+  const [basketsResponse, tokenResponse] = await Promise.all([
+    baskets.get(at),
+    auth.getToken(at),
+  ]);
+
+  if (!tokenResponse.data?.memberId || !basketsResponse.data) {
+    return (
+      <>
+        <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
+          {dtoList
+            .filter(item => !item.del)
+            .map(item => (
+              <ProductItem item={item} key={item.pid} />
+            ))}
+        </ul>
+
+        <InfiniteScroll keyword={keyword} initialPage={2} />
+      </>
+    );
+  }
+
+  const userBaskets = basketsResponse.data.filter(
+    basket => basket.mid === tokenResponse.data?.memberId
   );
 
   return (

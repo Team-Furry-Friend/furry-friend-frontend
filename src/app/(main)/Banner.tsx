@@ -1,4 +1,4 @@
-import { api } from '@/libs/api';
+import { api, products } from '@/libs/api';
 
 import { PopularityResponse } from '@/types';
 
@@ -8,9 +8,7 @@ import 'swiper/css/pagination';
 import BannerSwiper from '@/app/(main)/BannerSwiper';
 
 const Banner = async () => {
-  const {
-    data: { data: posts },
-  } = await api.get<PopularityResponse>('/products/popularity');
+  const posts = await products.getPopularity();
 
   return <BannerSwiper posts={posts} />;
 };

@@ -4,7 +4,7 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Datum, DtoList, ProductListResponse } from '@/types';
 import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
-import { api } from '@/libs/api';
+import { api, products } from '@/libs/api';
 
 interface InfiniteScrollProps {
   userBaskets?: Datum[];
@@ -21,13 +21,11 @@ const InfiniteScroll = ({
 }: InfiniteScrollProps) => {
   const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
-      api
-        .get<ProductListResponse>(
-          `/products?page=${page}&size=16${
-            keyword ? `&keyword=${keyword}` : ''
-          }${type ? `&type=${type}` : ''}`
-        )
-        .then(r => r.data.data.dtoList.filter(item => !item.del)),
+      products.get({
+        page,
+        keyword,
+        type,
+      }),
     initialPage: initialPage || 1,
     viewPerPage: 16,
   });

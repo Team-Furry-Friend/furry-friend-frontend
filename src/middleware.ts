@@ -6,7 +6,12 @@ export async function middleware(request: NextRequest) {
 
   if (at) {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid`,
+      {
+        headers: {
+          Authorization: `Bearer ${at}`,
+        },
+      }
     );
 
     const body = await response.json();

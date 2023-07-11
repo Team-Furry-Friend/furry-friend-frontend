@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { api } from '@/libs/api';
+import { api, auth } from '@/libs/api';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 
@@ -11,21 +11,7 @@ const LogoutBtn = ({ at }: { at: string }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
-    setIsLoading(true);
-
-    try {
-      await api.post(`/member/logout`, {
-        access_token: at,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-
-    setIsLoading(false);
-
-    Cookies.set('access_token', '', {
-      expires: 0,
-    });
+    auth.signOut();
 
     router.refresh();
     router.push('/login');

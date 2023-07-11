@@ -5,7 +5,7 @@ import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import FunctionModal from '@/components/modals/FunctionModal';
-import { api } from '@/libs/api';
+import { api, products } from '@/libs/api';
 import NoticeModal from '@/components/modals/NoticeModal';
 
 interface RemoveBtnProps {
@@ -23,9 +23,7 @@ const RemoveBtn = ({ at, pid }: RemoveBtnProps) => {
     setIsLoading(true);
 
     try {
-      await api.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${pid}/${at}`
-      );
+      await products.delete(pid, at);
 
       setModal(null);
       router.push('/');

@@ -5,7 +5,7 @@ import {
   TokenResponse,
 } from '@/types';
 import Image from 'next/image';
-import { api } from '@/libs/api';
+import { api, auth, baskets, comments, products } from '@/libs/api';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { cookies } from 'next/headers';
@@ -25,11 +25,7 @@ export const generateMetadata = async ({
 }: {
   params: { pid: string };
 }): Promise<Metadata> => {
-  const {
-    data: { data: detail },
-  } = await api.get<ProductDetailResponse>(
-    `/products/detail?pid=${params.pid}`
-  );
+  const detail = await products.getProduct(params.pid);
 
   return {
     title: detail.pname,
@@ -54,33 +50,20 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     return <Auth />;
   }
 
-  const tokenResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
-  );
+  const tokenResponse = await auth.getToken(at);
 
-  const tokenBody = (await tokenResponse.json()) as TokenResponse;
-
-  const isValid = tokenBody.status === 'success';
+  const isValid = tokenResponse.status === 'success';
 
   if (!isValid) {
     return <Auth />;
   }
 
-  const [
-    {
-      data: { data: detail },
-    },
-    {
-      data: { data: baskets },
-    },
-    {
-      data: { data: comments },
-    },
-  ] = await Promise.all([
-    api.get<ProductDetailResponse>(`/products/detail?pid=${params.pid}`),
-    api.get<BasketResponse>(`/baskets/member/${at}`),
-    api.get<CommentResponse>(`/reviews/${params.pid}`),
-  ]);
+  const [detail, { data: basketList }, { data: commentList }] =
+    await Promise.all([
+      products.getProduct(params.pid),
+      baskets.get(at),
+      comments.get(params.pid),
+    ]);
 
   if (detail.del) {
     return (
@@ -101,8 +84,8 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     );
   }
 
-  const userBaskets = baskets?.filter(
-    basket => basket.mid === tokenBody.data?.memberId
+  const userBaskets = basketList?.filter(
+    basket => basket.mid === tokenResponse.data?.memberId
   );
 
   return (
@@ -130,7 +113,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
 
           <ShareBtn />
 
-          {tokenBody.data?.memberId === detail.mid && (
+          {tokenResponse.data?.memberId === detail.mid && (
             <div className='relative group'>
               <IoMenuOutline
                 className='rounded cursor-pointer bg-white group-hover:bg-gray-200'
@@ -182,7 +165,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
 
       <div className='bg-gray-200 h-[1px] mb-8' />
       <CommentForm at={at} pid={params.pid} />
-      <CommentList comments={comments} />
+      <CommentList comments={commentList} />
     </div>
   );
 };

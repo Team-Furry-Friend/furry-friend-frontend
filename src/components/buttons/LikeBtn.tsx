@@ -2,7 +2,7 @@
 
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useModal } from '@/store/modalStore';
-import { api } from '@/libs/api';
+import { api, baskets } from '@/libs/api';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Datum } from '@/types';
@@ -25,18 +25,13 @@ const LikeBtn = ({ basket, at, pid }: LikeBtnProps) => {
 
     if (!basket) {
       try {
-        await api.post('/baskets/', {
-          pid,
-          jwtRequest: {
-            access_token: at,
-          },
-        });
+        await baskets.createBasket(pid, at);
       } catch (e) {
         setModal(<NoticeModal texts={['찜하기에 실패하였습니다.']} />);
       }
     } else {
       try {
-        await api.delete(`/baskets/${basket.bid}/${at}`);
+        await baskets.removeBasket(basket.bid, at);
       } catch (e) {
         setModal(<NoticeModal texts={['찜 취소에 실패하였습니다.']} />);
       }

@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { api } from '@/libs/api';
+import { api, comments } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 
@@ -33,15 +33,12 @@ const CommentForm = ({ at, pid }: CommentFormProps) => {
     setIsLoading(true);
 
     try {
-      await api.post('/reviews/', {
-        commentDTO: {
-          pid,
-          text: fields.text,
-        },
-        jwtRequest: {
-          access_token: at,
-        },
+      await comments.post({
+        pid,
+        text: fields.text,
+        at: `Bearer ${at}`,
       });
+
       reset();
     } catch (e) {
       setModal(<NoticeModal texts={['댓글 작성에 실패하였습니다.']} />);

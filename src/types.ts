@@ -2,7 +2,12 @@ export interface LoginResponse {
   statusCode: number;
   status: string;
   message: string;
-  data: string;
+  data: Tokens;
+}
+
+export interface Tokens {
+  refreshToken: string;
+  accessToken: string;
 }
 
 export interface RegisterResponse {
@@ -63,7 +68,7 @@ export interface Detail {
   pexplain: string;
   pprice: number;
   del: boolean;
-  mid: null;
+  mid: number;
   regDate: Date;
   modDate: Date;
   imageDTOList: ImageDTOList[];
@@ -88,6 +93,7 @@ export interface TokenResponse {
   message: string;
   data?: {
     memberId: number;
+    memberName: string;
   };
 }
 

@@ -1,8 +1,7 @@
 import EditForm from '@/app/(main)/products/[pid]/edit/EditForm';
 import { cookies } from 'next/headers';
 import Auth from '@/components/layouts/Auth';
-import { ProductDetailResponse, TokenResponse } from '@/types';
-import { api } from '@/libs/api';
+import { auth, products } from '@/libs/api';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { redirect } from 'next/navigation';
@@ -13,11 +12,7 @@ export const generateMetadata = async ({
 }: {
   params: { pid: string };
 }): Promise<Metadata> => {
-  const {
-    data: { data: detail },
-  } = await api.get<ProductDetailResponse>(
-    `/products/detail?pid=${params.pid}`
-  );
+  const detail = await products.getProduct(params.pid);
 
   return {
     title: detail.pname,
@@ -42,25 +37,17 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     return <Auth />;
   }
 
-  const tokenResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`
-  );
+  const tokenResponse = await auth.getToken(at);
 
-  const tokenBody = (await tokenResponse.json()) as TokenResponse;
+  const isValid = tokenResponse.status === 'success';
 
-  const isValid = tokenBody.status === 'success';
-
-  if (!isValid || !tokenBody.data?.memberId) {
+  if (!isValid || !tokenResponse.data?.memberId) {
     return <Auth />;
   }
 
-  const {
-    data: { data: detail },
-  } = await api.get<ProductDetailResponse>(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/detail?pid=${params.pid}`
-  );
+  const detail = await products.getProduct(params.pid);
 
-  if (detail.mid !== tokenBody.data.memberId) {
+  if (detail.mid !== tokenResponse.data.memberId) {
     return redirect(`../${detail.pid}`);
   }
 
@@ -74,7 +61,11 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       </Link>
 
       <h2 className='font-bold text-2xl'>상품 수정</h2>
-      <EditForm at={at} memberId={tokenBody.data.memberId} detail={detail} />
+      <EditForm
+        at={at}
+        memberId={tokenResponse.data.memberId}
+        detail={detail}
+      />
     </div>
   );
 };

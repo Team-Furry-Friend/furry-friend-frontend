@@ -2,7 +2,7 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { api } from '@/libs/api';
+import { api, auth } from '@/libs/api';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
@@ -30,14 +30,15 @@ const LoginForm = () => {
 
     try {
       const {
-        data: { data: access_token },
-      } = await api.post<LoginResponse>(
-        `/member/login?username=${fields.username}&password=${fields.password}`,
-        fields
-      );
+        data: { accessToken, refreshToken },
+      } = await auth.signIn(fields);
 
-      Cookies.set('access_token', access_token, {
+      Cookies.set('access_token', accessToken.replace('Bearer ', ''), {
         expires: 7,
+      });
+
+      Cookies.set('refresh_token', refreshToken.replace('Bearer ', ''), {
+        expires: 30,
       });
 
       router.push('/');

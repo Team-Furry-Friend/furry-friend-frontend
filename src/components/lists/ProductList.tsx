@@ -1,26 +1,18 @@
-import { BasketResponse, ProductListResponse, TokenResponse } from '@/types';
+import { ProductListResponse } from '@/types';
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import ProductItem from '@/components/items/ProductItem';
 import { cookies } from 'next/headers';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
-import { api } from '@/libs/api';
+import { api, auth, baskets, products } from '@/libs/api';
 
 const ProductList = async () => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
   if (!at) {
-    const [
-      {
-        data: {
-          data: { dtoList },
-        },
-      },
-    ] = await Promise.all([
-      api.get<ProductListResponse>(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`
-      ),
-    ]);
+    const dtoList = await products.get({
+      page: 1,
+    });
 
     return (
       <>
@@ -37,28 +29,15 @@ const ProductList = async () => {
     );
   }
 
-  const [
-    {
-      data: {
-        data: { dtoList },
-      },
-    },
-    basketsResponse,
-    tokenResponse,
-  ] = await Promise.all([
-    api.get<ProductListResponse>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/products?page=1&size=16`
-    ),
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/baskets/member/${at}`),
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/gateway/isvalid/${at}`),
+  const [dtoList, basketResponse, tokenResponse] = await Promise.all([
+    products.get({
+      page: 1,
+    }),
+    baskets.get(at),
+    auth.getToken(at),
   ]);
 
-  const [{ data: baskets }, { data: memberData }] = (await Promise.all([
-    basketsResponse.json(),
-    tokenResponse.json(),
-  ])) as [BasketResponse, TokenResponse];
-
-  if (!memberData || !baskets) {
+  if (!tokenResponse.data?.memberId || !basketResponse.data) {
     return (
       <>
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
@@ -74,8 +53,8 @@ const ProductList = async () => {
     );
   }
 
-  const userBaskets = baskets.filter(
-    basket => basket.mid === memberData.memberId
+  const userBaskets = basketResponse.data.filter(
+    basket => basket.mid === tokenResponse.data?.memberId
   );
 
   return (
