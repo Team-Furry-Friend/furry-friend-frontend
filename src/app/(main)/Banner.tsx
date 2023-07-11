@@ -1,6 +1,4 @@
-import { api, products } from '@/libs/api';
-
-import { PopularityResponse } from '@/types';
+import { products } from '@/libs/api';
 
 import 'swiper/css';
 import 'swiper/css/navigation';

@@ -2,7 +2,7 @@
 
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useModal } from '@/store/modalStore';
-import { api, baskets } from '@/libs/api';
+import { baskets } from '@/libs/api';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Datum } from '@/types';

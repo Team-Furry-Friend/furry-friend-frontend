@@ -1,10 +1,10 @@
 'use client';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { Datum, DtoList, ProductListResponse } from '@/types';
+import { Datum, DtoList } from '@/types';
 import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
-import { api, products } from '@/libs/api';
+import { products } from '@/libs/api';
 
 interface InfiniteScrollProps {
   userBaskets?: Datum[];

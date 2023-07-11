@@ -1,5 +1,4 @@
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
-import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { auth, baskets, products } from '@/libs/api';
 import ProductItem from '@/components/items/ProductItem';

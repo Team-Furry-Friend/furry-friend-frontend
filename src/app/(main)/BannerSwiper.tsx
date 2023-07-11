@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BannerNavigation from '@/app/(main)/BannerNavigation';
 import { useState } from 'react';
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getDateDiff } from '@/libs/getDateDiff';
 import { Popularity } from '@/types';

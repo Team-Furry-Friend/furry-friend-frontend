@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { authMenus } from '@/datas/menuData';
 import LogoutBtn from '@/components/buttons/LogoutBtn';
-import { api, auth } from '@/libs/api';
+import { auth } from '@/libs/api';
 
 const AuthMenus = async () => {
   const cookieStore = cookies();

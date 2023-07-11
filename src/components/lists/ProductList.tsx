@@ -1,9 +1,8 @@
-import { ProductListResponse } from '@/types';
 import InfiniteScroll from '@/components/lists/InfiniteScroll';
 import ProductItem from '@/components/items/ProductItem';
 import { cookies } from 'next/headers';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
-import { api, auth, baskets, products } from '@/libs/api';
+import { auth, baskets, products } from '@/libs/api';
 
 const ProductList = async () => {
   const cookieStore = cookies();

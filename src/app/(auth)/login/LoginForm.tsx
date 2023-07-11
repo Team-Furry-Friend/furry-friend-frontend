@@ -2,11 +2,10 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { api, auth } from '@/libs/api';
+import { auth } from '@/libs/api';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
-import { LoginResponse } from '@/types';
 import Cookies from 'js-cookie';
 
 type LoginFields = {

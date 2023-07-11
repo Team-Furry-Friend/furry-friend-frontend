@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { api, comments } from '@/libs/api';
+import { comments } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 

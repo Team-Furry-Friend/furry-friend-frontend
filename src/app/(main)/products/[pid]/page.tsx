@@ -1,11 +1,5 @@
-import {
-  BasketResponse,
-  CommentResponse,
-  ProductDetailResponse,
-  TokenResponse,
-} from '@/types';
 import Image from 'next/image';
-import { api, auth, baskets, comments, products } from '@/libs/api';
+import { auth, baskets, comments, products } from '@/libs/api';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { cookies } from 'next/headers';

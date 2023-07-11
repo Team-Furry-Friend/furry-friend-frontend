@@ -5,7 +5,7 @@ import { useModal } from '@/store/modalStore';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import FunctionModal from '@/components/modals/FunctionModal';
-import { api, products } from '@/libs/api';
+import { products } from '@/libs/api';
 import NoticeModal from '@/components/modals/NoticeModal';
 
 interface RemoveBtnProps {

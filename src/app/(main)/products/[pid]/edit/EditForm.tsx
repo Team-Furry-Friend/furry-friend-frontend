@@ -1,9 +1,9 @@
 'use client';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, products } from '@/libs/api';
+import { products } from '@/libs/api';
 import Image from 'next/image';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';

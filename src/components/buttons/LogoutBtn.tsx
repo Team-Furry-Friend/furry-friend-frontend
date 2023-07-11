@@ -1,8 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { api, auth } from '@/libs/api';
-import Cookies from 'js-cookie';
+import { auth } from '@/libs/api';
 import { useState } from 'react';
 
 const LogoutBtn = ({ at }: { at: string }) => {

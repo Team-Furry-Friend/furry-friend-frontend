@@ -3,11 +3,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Link from 'next/link';
-import { api, auth } from '@/libs/api';
+import { auth } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import { useRouter } from 'next/navigation';
-import { RegisterResponse } from '@/types';
 
 type RegisterFields = {
   email: string;

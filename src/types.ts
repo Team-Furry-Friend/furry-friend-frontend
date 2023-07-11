@@ -60,6 +60,7 @@ export interface ProductDetailResponse {
   message: string;
   data: Detail;
 }
+
 export interface Detail {
   pid: number;
   pcategory: string;
