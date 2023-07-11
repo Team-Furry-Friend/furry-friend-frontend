@@ -11,8 +11,9 @@ import {
   TokenResponse,
 } from '@/types';
 import Cookies from 'js-cookie';
+import { redirect } from 'next/navigation';
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
 
@@ -35,12 +36,31 @@ type RegisterFields = {
 };
 
 export const auth = {
+  // getToken 함수는 Server Component 에서만 사용해야 합니다.
   async getToken(at: string) {
     const { data } = await api.get<TokenResponse>('/gateway/isvalid', {
       headers: {
         Authorization: `Bearer ${at}`,
       },
     });
+
+    if (data.statusCode === 401) {
+      redirect('/refresh');
+    }
+
+    return data;
+  },
+
+  async refreshToken(rt: string) {
+    const { data } = await api.post<LoginResponse>(
+      '/member/refresh-token',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${rt}`,
+        },
+      }
+    );
 
     return data;
   },
