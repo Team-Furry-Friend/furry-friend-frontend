@@ -37,7 +37,10 @@ const Header = () => {
           <CategoryList />
           <SearchBtn />
 
-          <Link href={'/chats'} className='flex gap-2 px-2'>
+          <Link
+            href={'/chats'}
+            className='flex gap-2 items-center px-2 md:px-4 h-full bg-white hover:bg-gray-200'
+          >
             <BsChatDots size={24} />
 
             <span className='hidden md:block'>채팅</span>
