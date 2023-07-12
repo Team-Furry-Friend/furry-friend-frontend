@@ -6,6 +6,7 @@ import AuthMenusSkeleton from '@/components/skeletons/AuthMenusSkeleton';
 import Image from 'next/image';
 import SearchBtn from '@/components/buttons/SearchBtn';
 import CategoryList from '@/components/lists/CategoryList';
+import { BsChatDots } from 'react-icons/bs';
 
 const font = Bevan({
   weight: '400',
@@ -35,6 +36,12 @@ const Header = () => {
         <div className='flex items-center h-12 md:h-16'>
           <CategoryList />
           <SearchBtn />
+
+          <Link href={'/chats'} className='flex gap-2 px-2'>
+            <BsChatDots size={24} />
+
+            <span className='hidden md:block'>채팅</span>
+          </Link>
 
           <Suspense fallback={<AuthMenusSkeleton />}>
             <AuthMenus />
