@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import {
   BasketResponse,
   CommentResponse,
+  CreateChatRoomResponse,
   LoginResponse,
   PopularityResponse,
   ProductDetailResponse,
@@ -219,5 +220,25 @@ export const comments = {
         access_token: at,
       },
     });
+  },
+};
+
+type CreateChatRoomOptions = {
+  chatParticipantsId: number | string;
+  chatParticipantsName: string;
+  jwtRequest: {
+    access_token: string;
+  };
+};
+
+export const chats = {
+  async getChatList() {
+    return 1;
+  },
+
+  async createChatRoom(options: CreateChatRoomOptions) {
+    const { data } = await api.post<CreateChatRoomResponse>('/chats', options);
+
+    return data;
   },
 };
