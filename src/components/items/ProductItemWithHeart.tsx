@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { DtoList } from '@/types';
 import { AiFillHeart } from 'react-icons/ai';
+import { getDateDiff } from '@/libs/getDateDiff';
 
 const ProductItemWithHeart = ({
   item,
@@ -36,9 +37,14 @@ const ProductItemWithHeart = ({
           )}
         </div>
 
-        <p className='text-gray-400 text-sm'>{item.pcategory}</p>
-        <h4 className='font-bold'>{item.pname}</h4>
-        <p>{item.pprice}원</p>
+        <div className='flex flex-col gap-1 items-start justify-between mt-1'>
+          <p className='text-gray-400 text-sm p-1 border rounded w-fit'>
+            {item.pcategory}
+          </p>
+          <h4 className='font-bold'>{item.pname}</h4>
+        </div>
+        <p className='font-bold'>{item.pprice}원</p>
+        <p className='text-gray-400'>{getDateDiff(item.regDate)}</p>
       </Link>
     </li>
   );
