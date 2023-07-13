@@ -158,11 +158,13 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       )}
       <p className='break-all py-4'>{detail.pexplain}</p>
 
-      <ChatBtn
-        chatParticipantsId={detail.mid}
-        chatParticipantsName={detail.mname}
-        at={at}
-      />
+      {tokenResponse.data?.memberId !== detail.mid && (
+        <ChatBtn
+          chatParticipantsId={detail.mid}
+          chatParticipantsName={detail.mname}
+          at={at}
+        />
+      )}
 
       <div className='bg-gray-200 h-[1px] mb-8' />
       <CommentForm at={at} pid={params.pid} />
