@@ -20,7 +20,9 @@ const Loading = () => {
       <div className='w-32 h-4 bg-gray-200 rounded animate-pulse' />
       <div className='w-16 h-4 bg-gray-200 rounded animate-pulse' />
 
-      <div className='h-[1px] bg-gray-200 my-4' />
+      <div className='w-full h-8 bg-gray-200 rounded animate-pulse' />
+
+      <div className='h-[1px] bg-gray-200 mt-2 mb-4' />
 
       <div className='bg-gray-200 animate-pulse h-32 rounded mb-8' />
 

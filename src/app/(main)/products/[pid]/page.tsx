@@ -13,6 +13,7 @@ import CommentList from '@/app/(main)/products/[pid]/CommentList';
 import { getDateDiff } from '@/libs/getDateDiff';
 import { Metadata } from 'next';
 import ShareBtn from '@/components/buttons/ShareBtn';
+import ChatBtn from '@/app/(main)/products/[pid]/ChatBtn';
 
 export const generateMetadata = async ({
   params,
@@ -156,6 +157,12 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         </ul>
       )}
       <p className='break-all py-4'>{detail.pexplain}</p>
+
+      <ChatBtn
+        chatParticipantsId={detail.mid}
+        chatParticipantsName={detail.mname}
+        at={at}
+      />
 
       <div className='bg-gray-200 h-[1px] mb-8' />
       <CommentForm at={at} pid={params.pid} />
