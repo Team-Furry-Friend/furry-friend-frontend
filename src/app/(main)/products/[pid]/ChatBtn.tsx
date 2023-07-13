@@ -3,6 +3,8 @@
 import { chats } from '@/libs/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useModal } from '@/store/modalStore';
+import NoticeModal from '@/components/modals/NoticeModal';
 
 type CreateChatRoomOptions = {
   chatParticipantsId: number | string;
@@ -16,22 +18,26 @@ const ChatBtn = ({
   at,
 }: CreateChatRoomOptions) => {
   const router = useRouter();
+
+  const setModal = useModal(s => s.setModal);
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
     setIsLoading(true);
 
     try {
-      const data = await chats.createChatRoom({
+      const response = await chats.createChatRoom({
         chatParticipantsName,
         chatParticipantsId,
         jwtRequest: {
-          access_token: at,
+          access_token: `Bearer ${at}`,
         },
       });
-      console.log(data);
+
+      router.refresh();
+      router.push(`/chats/${response.data.chatRoomResponseDTO.chatRoomId}`);
     } catch (e) {
-      console.log(e);
+      setModal(<NoticeModal texts={['채팅방 생성에 실패하였습니다.']} />);
     }
     setIsLoading(false);
   };

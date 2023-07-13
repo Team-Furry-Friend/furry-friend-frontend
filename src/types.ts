@@ -136,3 +136,25 @@ export interface Popularity {
   imageDTOList: ImageDTOList[];
   mname: null;
 }
+
+export interface CreateChatRoomResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: ChatRoomData;
+}
+
+export interface ChatRoomData {
+  chatParticipantsId: number;
+  chatParticipantsMemberId: number;
+  chatParticipantsMemberName: string;
+  chatParticipantsDel: boolean;
+  chatRoomResponseDTO: ChatRoomResponseDTO;
+}
+
+export interface ChatRoomResponseDTO {
+  chatRoomId: number;
+  chatName: string;
+  chatCreator: number;
+  chatDel: boolean;
+}
