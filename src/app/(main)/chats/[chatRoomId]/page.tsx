@@ -36,7 +36,7 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   }
 
   return (
-    <div>
+    <div className='h-full flex flex-col'>
       <div className='flex justify-between p-2 md:p-4 border-b'>
         <h2 className='font-bold'>{params.chatRoomId}</h2>
 

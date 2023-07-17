@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs';
+import { CompatClient, Stomp } from '@stomp/stompjs';
+import ChatForm from '@/app/(main)/chats/[chatRoomId]/ChatForm';
+import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
 
 interface ChatFieldProps {
   at: string;
@@ -11,36 +13,56 @@ interface ChatFieldProps {
 }
 
 const ChatField = ({ chatRoomId, at, rt }: ChatFieldProps) => {
+  const stompClient = useRef<CompatClient | null>(null);
+
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socket = new SockJS('https://howstheairtoday.site/chats/furry');
-    const stompClient = Stomp.over(socket);
+    const socket = new SockJS(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/chats/furry`
+    );
+    stompClient.current = Stomp.over(socket);
 
-    stompClient.connect(
+    stompClient.current.connect(
       {
         Authorization: `Bearer ${rt}`,
       },
       () => {
         setIsConnected(true);
 
-        stompClient.subscribe(`/sub/chats/${chatRoomId}`, response => {
-          console.log(response);
-        });
+        stompClient.current?.subscribe(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/sub/chats/${chatRoomId}`,
+          response => {
+            console.log(response);
+          }
+        );
       },
-      (error: any) => {
-        console.log(error);
+      () => {
+        console.log('error');
       }
     );
 
     return () => {
-      stompClient.disconnect(() => {
+      stompClient.current?.disconnect(() => {
         console.log('연결 종료');
       });
     };
   }, []);
 
-  return <div>{isConnected ? '연결됨' : '연결안됨'}</div>;
+  if (!isConnected || !stompClient.current) {
+    return <div>연결중</div>;
+  }
+
+  return (
+    <div className='h-full'>
+      <ChatList stompClient={stompClient.current} />
+      <ChatForm
+        stompClient={stompClient.current}
+        chatRoomId={chatRoomId}
+        rt={rt}
+      />
+    </div>
+  );
 };
 
 export default ChatField;
