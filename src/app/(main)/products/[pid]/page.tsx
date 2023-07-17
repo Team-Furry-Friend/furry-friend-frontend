@@ -79,8 +79,6 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     );
   }
 
-  const userBaskets = basketList?.filter(basket => basket.pid === detail.pid);
-
   return (
     <div className='w-full flex flex-col gap-2'>
       <Link href={'/'} className='block w-fit mb-4'>
@@ -99,7 +97,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
 
         <div className='flex justify-between gap-2 items-center'>
           <LikeBtn
-            basket={userBaskets?.find(basket => basket.pid === detail.pid)}
+            basket={basketList?.find(basket => basket.pid === detail.pid)}
             at={at}
             pid={detail.pid}
           />
