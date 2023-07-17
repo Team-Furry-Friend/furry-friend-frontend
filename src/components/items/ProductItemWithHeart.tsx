@@ -9,7 +9,7 @@ const ProductItemWithHeart = ({
   isLike,
 }: {
   item: DtoList;
-  isLike: boolean;
+  isLike: boolean | undefined;
 }) => {
   return (
     <li className='w-[calc(50%-4px)] md:w-[calc((100%-48px)/4)] '>

@@ -50,10 +50,6 @@ const List = async ({ type }: { type: string }) => {
     );
   }
 
-  const userBaskets = basketsResponse.data.filter(
-    basket => basket.mid === tokenResponse.data?.memberId
-  );
-
   return (
     <>
       <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 mb-8'>
@@ -61,12 +57,18 @@ const List = async ({ type }: { type: string }) => {
           <ProductItemWithHeart
             item={item}
             key={item.pid}
-            isLike={userBaskets.some(basket => basket.pid === item.pid)}
+            isLike={basketsResponse.data?.some(
+              basket => basket.pid === item.pid
+            )}
           />
         ))}
       </ul>
 
-      <InfiniteScroll type={type} userBaskets={userBaskets} initialPage={2} />
+      <InfiniteScroll
+        type={type}
+        userBaskets={basketsResponse.data}
+        initialPage={2}
+      />
     </>
   );
 };

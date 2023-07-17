@@ -79,9 +79,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
     );
   }
 
-  const userBaskets = basketList?.filter(
-    basket => basket.mid === tokenResponse.data?.memberId
-  );
+  const userBaskets = basketList?.filter(basket => basket.pid === detail.pid);
 
   return (
     <div className='w-full flex flex-col gap-2'>
