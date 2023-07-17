@@ -12,7 +12,7 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
 
   if (!at || !rt) {
     return (
-      <div className='center h-full flex justify-center items-center'>
+      <div className='w-full center h-full flex justify-center items-center'>
         <div className='max-w-2xl border rounded flex flex-col items-center gap-4 p-4 w-full'>
           <p className='font-bold text-xl text-center'>
             로그인 후 이용해주세요!
@@ -36,7 +36,7 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   }
 
   return (
-    <div className='h-full flex flex-col'>
+    <div className='w-full h-full flex flex-col'>
       <div className='flex justify-between p-2 md:p-4 border-b'>
         <h2 className='font-bold'>{params.chatRoomId}</h2>
 

@@ -1,4 +1,21 @@
+import { cookies } from 'next/headers';
+import Auth from '@/components/layouts/Auth';
+import { auth } from '@/libs/api';
+
 const Page = async () => {
+  const cookieStore = cookies();
+  const at = cookieStore.get('access_token')?.value;
+
+  if (!at) {
+    return <Auth />;
+  }
+
+  const tokenResponse = await auth.getToken(at);
+
+  if (tokenResponse.status !== 'success') {
+    return <Auth />;
+  }
+
   return (
     <div className='h-full flex justify-center items-center'>
       <div className='max-w-2xl border p-4 rounded'>
