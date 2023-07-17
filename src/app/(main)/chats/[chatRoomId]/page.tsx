@@ -10,6 +10,8 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   const at = cookieStore.get('access_token')?.value;
   const rt = cookieStore.get('refresh_token')?.value;
 
+  // TODO: 토큰 검증 로직 + loading.tsx 해야함
+
   if (!at || !rt) {
     return (
       <div className='w-full center h-full flex justify-center items-center'>

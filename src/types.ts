@@ -175,3 +175,31 @@ export interface MessageData {
   regDate: Date;
   modDate: Date;
 }
+
+export interface ChatRoomsResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: ChatRoomsData[];
+}
+
+export interface ChatRoomsData {
+  chatRoomResponseDTO: ChatRoomResponseDTO;
+  chatMessageResponseDTO: ChatMessageResponseDTO;
+}
+
+export interface ChatMessageResponseDTO {
+  chatMessageId: number;
+  chatMessageSenderId: number;
+  chatMessageSerderName: string;
+  chatMessageContent: string;
+  chatMessageRead: boolean;
+  chatMessageDel: boolean;
+}
+
+export interface ChatRoomResponseDTO {
+  chatRoomId: number;
+  chatName: string;
+  chatCreator: number;
+  chatDel: boolean;
+}

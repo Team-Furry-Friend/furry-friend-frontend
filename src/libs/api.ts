@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 import {
   BasketResponse,
+  ChatRoomsResponse,
   CommentResponse,
   CreateChatRoomResponse,
   LoginResponse,
@@ -232,8 +233,13 @@ type CreateChatRoomOptions = {
 };
 
 export const chats = {
-  async getChatList() {
-    return 1;
+  async getChatList(rt: string) {
+    const { data } = await api.get<ChatRoomsResponse>('/chats', {
+      headers: {
+        Authorization: `Bearer ${rt}`,
+      },
+    });
+    return data;
   },
 
   async createChatRoom(options: CreateChatRoomOptions) {
