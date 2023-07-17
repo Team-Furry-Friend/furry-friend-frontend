@@ -2,6 +2,7 @@
 
 import { forwardRef } from 'react';
 import { MessageData } from '@/types';
+import { getDateDiff } from '@/libs/getDateDiff';
 
 interface ChatListProps {
   messages: MessageData[];
@@ -15,7 +16,7 @@ const ChatList = forwardRef<HTMLUListElement, ChatListProps>(
         {messages.map(message => (
           <li
             key={message.chatMessageId}
-            className={`flex flex-col  ${
+            className={`flex flex-col ${
               memberId === message.chatMessageSenderId ? 'items-end' : ''
             } gap-2 p-2`}
           >
@@ -30,6 +31,9 @@ const ChatList = forwardRef<HTMLUListElement, ChatListProps>(
               }`}
             >
               {message.chatMessageContent}
+            </p>
+            <p className='text-gray-500 text-sm'>
+              {getDateDiff(message.regDate)}
             </p>
           </li>
         ))}

@@ -172,4 +172,6 @@ export interface MessageData {
   chatMessageContent: string;
   chatMessageRead: boolean;
   chatMessageDel: boolean;
+  regDate: Date;
+  modDate: Date;
 }
