@@ -18,7 +18,7 @@ const ChatForm = ({ stompClient, chatRoomId, rt }: ChatFormProps) => {
 
   const onSubmit: SubmitHandler<ChatFields> = async fields => {
     stompClient.send(
-      `https://howstheairtoday.site/pub/chats/${chatRoomId}`,
+      `/pub/chats/${chatRoomId}`,
       {
         Authorization: `Bearer ${rt}`,
       },

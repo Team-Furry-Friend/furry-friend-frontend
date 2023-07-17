@@ -30,15 +30,9 @@ const ChatField = ({ chatRoomId, at, rt }: ChatFieldProps) => {
       () => {
         setIsConnected(true);
 
-        stompClient.current?.subscribe(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/sub/chats/${chatRoomId}`,
-          response => {
-            console.log(response);
-          }
-        );
-      },
-      () => {
-        console.log('error');
+        stompClient.current?.subscribe(`/sub/chats/${chatRoomId}`, response => {
+          console.log(response);
+        });
       }
     );
 
