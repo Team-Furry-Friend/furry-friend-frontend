@@ -5,17 +5,21 @@ import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import ChatForm from '@/app/(main)/chats/[chatRoomId]/ChatForm';
 import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
+import { MessageData, MessageResponse } from '@/types';
 
 interface ChatFieldProps {
-  at: string;
   rt: string;
   chatRoomId: string;
+  memberId: number;
 }
 
-const ChatField = ({ chatRoomId, at, rt }: ChatFieldProps) => {
+const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
   const stompClient = useRef<CompatClient | null>(null);
-
   const [isConnected, setIsConnected] = useState(false);
+
+  const [messages, setMessages] = useState<MessageData[]>([]);
+
+  const chatListRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const socket = new SockJS(
@@ -31,15 +35,17 @@ const ChatField = ({ chatRoomId, at, rt }: ChatFieldProps) => {
         setIsConnected(true);
 
         stompClient.current?.subscribe(`/sub/chats/${chatRoomId}`, response => {
-          console.log(response);
+          const message = JSON.parse(response.body) as MessageResponse;
+
+          setMessages(prev => [...prev, message.data]);
+
+          chatListRef.current?.scrollTo({});
         });
       }
     );
 
     return () => {
-      stompClient.current?.disconnect(() => {
-        console.log('연결 종료');
-      });
+      stompClient.current?.disconnect();
     };
   }, []);
 
@@ -48,8 +54,8 @@ const ChatField = ({ chatRoomId, at, rt }: ChatFieldProps) => {
   }
 
   return (
-    <div className='h-full'>
-      <ChatList stompClient={stompClient.current} />
+    <div className='h-[calc(100%-41px)] md:h-[calc(100%-57px)]'>
+      <ChatList messages={messages} memberId={memberId} ref={chatListRef} />
       <ChatForm
         stompClient={stompClient.current}
         chatRoomId={chatRoomId}

@@ -45,7 +45,11 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
         </button>
       </div>
 
-      <ChatField at={at} chatRoomId={params.chatRoomId} rt={rt} />
+      <ChatField
+        memberId={tokenResponse.data.memberId}
+        chatRoomId={params.chatRoomId}
+        rt={rt}
+      />
     </div>
   );
 };

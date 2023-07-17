@@ -158,3 +158,18 @@ export interface ChatRoomResponseDTO {
   chatCreator: number;
   chatDel: boolean;
 }
+
+export interface MessageResponse {
+  statusCode: number;
+  message: string;
+  data: MessageData;
+}
+
+export interface MessageData {
+  chatMessageId: number;
+  chatMessageSenderId: number;
+  chatMessageSerderName: string;
+  chatMessageContent: string;
+  chatMessageRead: boolean;
+  chatMessageDel: boolean;
+}

@@ -14,7 +14,7 @@ interface ChatFormProps {
   rt: string;
 }
 const ChatForm = ({ stompClient, chatRoomId, rt }: ChatFormProps) => {
-  const { register, handleSubmit } = useForm<ChatFields>();
+  const { register, handleSubmit, reset } = useForm<ChatFields>();
 
   const onSubmit: SubmitHandler<ChatFields> = async fields => {
     stompClient.send(
@@ -24,6 +24,8 @@ const ChatForm = ({ stompClient, chatRoomId, rt }: ChatFormProps) => {
       },
       JSON.stringify(fields)
     );
+
+    reset();
   };
 
   return (
