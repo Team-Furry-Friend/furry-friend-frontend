@@ -192,7 +192,7 @@ export interface ChatMessageResponseDTO {
   chatMessageId: number;
   chatMessageSenderId: number;
   chatMessageSerderName: string;
-  chatMessageContent: string;
+  chatMessageContent: string | null;
   chatMessageRead: boolean;
   chatMessageDel: boolean;
   regDate: Date;
@@ -211,5 +211,6 @@ export interface ChatRoomResponseDTO {
   chatRoomId: number;
   chatName: string;
   chatCreator: number;
+  chatCreatorName: string;
   chatDel: boolean;
 }
