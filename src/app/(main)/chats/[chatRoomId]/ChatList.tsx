@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, forwardRef, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { MessageData } from '@/types';
 import { getDateDiff } from '@/libs/getDateDiff';
 

@@ -17,8 +17,6 @@ interface ChatFieldProps {
 }
 
 const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
-  const router = useRouter();
-
   const stompClient = useRef<CompatClient | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
