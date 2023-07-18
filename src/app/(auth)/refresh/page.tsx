@@ -32,7 +32,7 @@ const Page = () => {
           expires: 30,
         });
 
-        router.push('/');
+        router.back();
         router.refresh();
       } catch (e) {
         auth.signOut();

@@ -14,6 +14,7 @@ import {
 } from '@/types';
 import Cookies from 'js-cookie';
 import { redirect } from 'next/navigation';
+import { RedirectType } from 'next/dist/client/components/redirect';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -47,7 +48,7 @@ export const auth = {
     });
 
     if (data.statusCode === 401) {
-      redirect('/refresh');
+      redirect('/refresh', RedirectType.push);
     }
 
     return data;
