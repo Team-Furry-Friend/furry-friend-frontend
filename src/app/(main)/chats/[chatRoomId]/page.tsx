@@ -1,9 +1,9 @@
-import { BiDotsVerticalRounded } from 'react-icons/bi';
 import ChatField from '@/app/(main)/chats/[chatRoomId]/ChatField';
 import { auth, chats } from '@/libs/api';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { BsTrash } from 'react-icons/bs';
 
 const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   const cookieStore = cookies();
@@ -44,9 +44,9 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   );
 
   const targetName =
-    room?.chatParticipantsResponseDTO.chatParticipantsMemberName;
+    room?.chatParticipantsResponseDTO.chatRoomResponseDTO.chatCreatorName;
 
-  const userName = room?.chatMessageResponseDTO.chatMessageSerderName;
+  const userName = room?.chatParticipantsResponseDTO.chatParticipantsMemberName;
 
   return (
     <div className='w-full h-full flex flex-col'>
@@ -56,7 +56,7 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
         </h2>
 
         <button>
-          <BiDotsVerticalRounded size={24} />
+          <BsTrash size={24} />
         </button>
       </div>
 
