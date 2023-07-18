@@ -37,17 +37,22 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
 
   const { data } = await chats.getChatList(rt);
 
+  const room = data.find(
+    room =>
+      room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId.toString() ===
+      params.chatRoomId
+  );
+
+  const targetName =
+    room?.chatParticipantsResponseDTO.chatParticipantsMemberName;
+
+  const userName = room?.chatMessageResponseDTO.chatMessageSerderName;
+
   return (
     <div className='w-full h-full flex flex-col'>
       <div className='flex justify-between p-2 md:p-4 border-b'>
         <h2 className='font-bold'>
-          {
-            data.find(
-              room =>
-                room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId.toString() ===
-                params.chatRoomId
-            )?.chatParticipantsResponseDTO.chatParticipantsMemberName
-          }
+          {tokenResponse.data.memberName === targetName ? userName : targetName}
         </h2>
 
         <button>
