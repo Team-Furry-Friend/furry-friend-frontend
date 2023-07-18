@@ -7,6 +7,7 @@ import ChatForm from '@/app/(main)/chats/[chatRoomId]/ChatForm';
 import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
 import { MessageData, MessageResponse } from '@/types';
 import ChatSkeleton from '@/components/skeletons/ChatSkeleton';
+import { useAutoScroll } from '@/hooks/useAutoScroll';
 
 interface ChatFieldProps {
   rt: string;
@@ -20,7 +21,7 @@ const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
 
   const [messages, setMessages] = useState<MessageData[]>([]);
 
-  const chatListRef = useRef<HTMLUListElement>(null);
+  const { setChatListElement } = useAutoScroll();
 
   useEffect(() => {
     const socket = new SockJS(
@@ -39,8 +40,6 @@ const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
           const message = JSON.parse(response.body) as MessageResponse;
 
           setMessages(prev => [...prev, message.data]);
-
-          chatListRef.current?.scrollTo({});
         });
       }
     );
@@ -56,7 +55,11 @@ const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
 
   return (
     <div className='h-[calc(100%-41px)] md:h-[calc(100%-57px)]'>
-      <ChatList messages={messages} memberId={memberId} ref={chatListRef} />
+      <ChatList
+        messages={messages}
+        memberId={memberId}
+        setChatListElement={setChatListElement}
+      />
       <ChatForm
         stompClient={stompClient.current}
         chatRoomId={chatRoomId}
