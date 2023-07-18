@@ -1,7 +1,7 @@
 import { auth, chats } from '@/libs/api';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import Image from 'next/image';
+import ChatRoomItem from '@/components/items/ChatRoomItem';
 
 const ChatRoomList = async () => {
   const cookieStore = cookies();
@@ -31,20 +31,11 @@ const ChatRoomList = async () => {
   return (
     <ul className='h-full'>
       {data.map(room => (
-        <li key={room.chatParticipantsResponseDTO.chatParticipantsId}>
-          <Link
-            href={`/chats/${room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId}`}
-            className='block p-2 border-b'
-          >
-            <p className='font-bold'>
-              {room.chatParticipantsResponseDTO.chatParticipantsMemberName ===
-              tokenResponse.data?.memberName
-                ? room.chatParticipantsResponseDTO.chatRoomResponseDTO
-                    .chatCreatorName
-                : room.chatParticipantsResponseDTO.chatParticipantsMemberName}
-            </p>
-          </Link>
-        </li>
+        <ChatRoomItem
+          room={room}
+          tokenResponse={tokenResponse}
+          key={room.chatParticipantsResponseDTO.chatParticipantsId}
+        />
       ))}
 
       {data.length === 0 && (

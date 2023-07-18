@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           </Suspense>
         </div>
 
-        <div className='w-full md:w-[calc(100%-256px)] flex justify-center'>
+        <div className='w-full md:w-[calc(100%-256px)] flex flex-col justify-center'>
           {children}
         </div>
       </div>
