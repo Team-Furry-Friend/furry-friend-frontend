@@ -6,6 +6,7 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import ChatForm from '@/app/(main)/chats/[chatRoomId]/ChatForm';
 import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
 import { MessageData, MessageResponse } from '@/types';
+import ChatSkeleton from '@/components/skeletons/ChatSkeleton';
 
 interface ChatFieldProps {
   rt: string;
@@ -50,9 +51,7 @@ const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
   }, []);
 
   if (!isConnected || !stompClient.current) {
-    // TODO: ChatField 로딩 UI 해야함
-
-    return <div>연결중</div>;
+    return <ChatSkeleton />;
   }
 
   return (
