@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import Auth from '@/components/layouts/Auth';
 import { auth } from '@/libs/api';
+import ChatRoomList from '@/app/(main)/chats/ChatRoomList';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -18,8 +19,12 @@ const Page = async () => {
 
   return (
     <div className='h-full flex justify-center items-center'>
-      <div className='max-w-2xl border p-4 rounded'>
+      <div className='hidden md:block max-w-2xl border p-4 rounded'>
         <p className='font-bold text-xl'>채팅방을 선택해주세요!</p>
+      </div>
+
+      <div className='w-full h-full block md:hidden'>
+        <ChatRoomList />
       </div>
     </div>
   );
