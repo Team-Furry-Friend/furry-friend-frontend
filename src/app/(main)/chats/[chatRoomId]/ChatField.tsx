@@ -8,6 +8,7 @@ import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
 import { MessageData, MessageResponse } from '@/types';
 import ChatSkeleton from '@/components/skeletons/ChatSkeleton';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
+import { useRouter } from 'next/navigation';
 
 interface ChatFieldProps {
   rt: string;
@@ -16,6 +17,8 @@ interface ChatFieldProps {
 }
 
 const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
+  const router = useRouter();
+
   const stompClient = useRef<CompatClient | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -45,7 +48,9 @@ const ChatField = ({ chatRoomId, rt, memberId }: ChatFieldProps) => {
     );
 
     return () => {
-      stompClient.current?.disconnect();
+      stompClient.current?.disconnect(() => {
+        setIsConnected(false);
+      });
     };
   }, []);
 
