@@ -15,12 +15,14 @@ const ChatRoomList = async () => {
   return (
     <ul className='h-full'>
       {data.map(room => (
-        <li key={room.chatRoomResponseDTO.chatRoomId}>
+        <li key={room.chatParticipantsResponseDTO.chatParticipantsId}>
           <Link
-            href={`/chats/${room.chatRoomResponseDTO.chatRoomId}`}
+            href={`/chats/${room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId}`}
             className='block p-2 border-b'
           >
-            <p className='font-bold'>{room.chatRoomResponseDTO.chatName}</p>
+            <p className='font-bold'>
+              {room.chatParticipantsResponseDTO.chatParticipantsMemberName}
+            </p>
           </Link>
         </li>
       ))}

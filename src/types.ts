@@ -184,8 +184,8 @@ export interface ChatRoomsResponse {
 }
 
 export interface ChatRoomsData {
-  chatRoomResponseDTO: ChatRoomResponseDTO;
   chatMessageResponseDTO: ChatMessageResponseDTO;
+  chatParticipantsResponseDTO: ChatParticipantsResponseDTO;
 }
 
 export interface ChatMessageResponseDTO {
@@ -195,6 +195,16 @@ export interface ChatMessageResponseDTO {
   chatMessageContent: string;
   chatMessageRead: boolean;
   chatMessageDel: boolean;
+  regDate: Date;
+  modDate: Date;
+}
+
+export interface ChatParticipantsResponseDTO {
+  chatParticipantsId: number;
+  chatParticipantsMemberId: number;
+  chatParticipantsMemberName: string;
+  chatParticipantsDel: boolean;
+  chatRoomResponseDTO: ChatRoomResponseDTO;
 }
 
 export interface ChatRoomResponseDTO {

@@ -1,6 +1,6 @@
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import ChatField from '@/app/(main)/chats/[chatRoomId]/ChatField';
-import { auth } from '@/libs/api';
+import { auth, chats } from '@/libs/api';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -9,8 +9,6 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
   const rt = cookieStore.get('refresh_token')?.value;
-
-  // TODO: 토큰 검증 로직 + loading.tsx 해야함
 
   if (!at || !rt) {
     return (
@@ -37,10 +35,20 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
     redirect('/refresh');
   }
 
+  const { data } = await chats.getChatList(rt);
+
   return (
     <div className='w-full h-full flex flex-col'>
       <div className='flex justify-between p-2 md:p-4 border-b'>
-        <h2 className='font-bold'>{params.chatRoomId}</h2>
+        <h2 className='font-bold'>
+          {
+            data.find(
+              room =>
+                room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId.toString() ===
+                params.chatRoomId
+            )?.chatParticipantsResponseDTO.chatParticipantsMemberName
+          }
+        </h2>
 
         <button>
           <BiDotsVerticalRounded size={24} />
