@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import LoginForm from '@/app/(auth)/login/LoginForm';
 import Link from 'next/link';
 import Image from 'next/image';
+import KakaoLogin from '@/app/(auth)/login/KakaoLogin';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -26,16 +27,7 @@ const Page = () => {
       </div>
 
       <div className='flex justify-center'>
-        <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/oauth2/authorization/kakao`}
-        >
-          <Image
-            src={'/icons/kakao_login.png'}
-            alt={'kakao login'}
-            width={180}
-            height={60}
-          />
-        </Link>
+        <KakaoLogin />
       </div>
     </>
   );
