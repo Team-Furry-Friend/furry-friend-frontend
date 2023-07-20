@@ -16,7 +16,7 @@ const ProductItemWithHeart = ({
       <Link className='flex flex-col gap-1' href={`/products/${item.pid}`}>
         <div className='relative'>
           {item.imageDTOList.length === 0 ? (
-            <div className='h-32 bg-gray-200 rounded flex justify-center items-center'>
+            <div className='h-32 bg-gray-200 dark:bg-gray-400 rounded flex justify-center items-center'>
               이미지없음
             </div>
           ) : (
@@ -38,7 +38,7 @@ const ProductItemWithHeart = ({
         </div>
 
         <div className='flex flex-col gap-1 items-start justify-between mt-1'>
-          <p className='text-gray-400 text-sm p-1 border rounded w-fit'>
+          <p className='bg-white dark:bg-gray-800 text-gray-400 text-sm p-1 border rounded w-fit'>
             {item.pcategory}
           </p>
           <h4 className='font-bold'>{item.pname}</h4>

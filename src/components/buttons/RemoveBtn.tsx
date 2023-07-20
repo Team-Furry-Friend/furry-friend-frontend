@@ -48,7 +48,7 @@ const RemoveBtn = ({ at, pid }: RemoveBtnProps) => {
   return (
     <button
       onClick={onClick}
-      className='w-32 flex items-center gap-2 p-2 bg-white disabled:bg-gray-200 hover:bg-gray-200'
+      className='w-32 flex items-center gap-2 p-2 bg-white dark:bg-gray-800 disabled:bg-gray-200 hover:bg-gray-200 dark:disabled:bg-gray-600 dark:hover:bg-gray-600'
     >
       <BsFillTrashFill size={24} />
       <p className='w-fit'>삭제하기</p>

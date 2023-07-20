@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Bevan } from 'next/font/google';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
+import ThemeSwitchBtn from '@/components/buttons/ThemeSwitchBtn';
 
 const font = Bevan({
   weight: '400',
@@ -44,7 +45,8 @@ const Footer = () => {
           </Link>
         </div>
 
-        <div className='w-full flex justify-end'>
+        <div className='w-full flex justify-end gap-2 items-center'>
+          <ThemeSwitchBtn />
           <Link
             href={'https://github.com/kkukileon305/furry-friend'}
             target='_blank'

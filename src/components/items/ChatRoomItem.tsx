@@ -20,7 +20,7 @@ const ChatRoomItem = ({ room, tokenResponse }: ChatRoomItemProps) => {
           chatRoomId ===
           room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId.toString()
             ? 'bg-blue-400 text-white'
-            : 'bg-white'
+            : 'bg-white dark:bg-gray-800'
         }`}
       >
         <p className='font-bold'>

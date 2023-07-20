@@ -26,7 +26,7 @@ const ShareBtn = () => {
   return (
     <button
       onClick={onClick}
-      className='bg-white rounded hover:bg-gray-200 p-1'
+      className='bg-white dark:bg-gray-800 disabled:bg-gray-200 hover:bg-gray-200 dark:disabled:bg-gray-600 dark:hover:bg-gray-600 rounded p-1'
       disabled={isLoading}
     >
       <AiOutlineLink size={24} />

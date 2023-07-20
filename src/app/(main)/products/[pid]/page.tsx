@@ -84,13 +84,13 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       <Link href={'/'} className='block w-fit mb-4'>
         <AiOutlineArrowLeft
           size={32}
-          className='border border-black rounded-full p-1'
+          className='border border-black dark:border-white rounded-full p-1'
         />
       </Link>
       <div className='flex justify-between items-center'>
         <Link
           href={`/category/${detail.pcategory}`}
-          className='text-gray-400 p-2 border rounded w-fit bg-white'
+          className='text-gray-400 p-2 border rounded w-fit bg-white dark:bg-gray-800'
         >
           {detail.pcategory}
         </Link>
@@ -107,7 +107,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
           {tokenResponse.data?.memberId === detail.mid && (
             <div className='relative group'>
               <IoMenuOutline
-                className='rounded cursor-pointer bg-white group-hover:bg-gray-200'
+                className='rounded cursor-pointer bg-white dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-600'
                 size={32}
               />
               <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block'>
@@ -117,7 +117,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
                 <li>
                   <Link
                     href={`${detail.pid}/edit`}
-                    className='w-32 flex items-center gap-2 p-2 bg-white disabled:bg-gray-200 hover:bg-gray-200'
+                    className='w-32 flex items-center gap-2 p-2 bg-white dark:bg-gray-800 disabled:bg-gray-200 hover:bg-gray-200 dark:disabled:bg-gray-600 dark:hover:bg-gray-600'
                   >
                     <BsFillPencilFill size={24} />
                     <p>수정하기</p>

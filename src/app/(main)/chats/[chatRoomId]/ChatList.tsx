@@ -17,7 +17,7 @@ const ChatList = ({
 }: ChatListProps) => {
   return (
     <ul
-      className='h-[calc(100%-48px)] overflow-y-scroll bg-gray-200'
+      className='h-[calc(100%-48px)] overflow-y-scroll bg-gray-200 dark:bg-gray-600'
       ref={setChatListElement}
     >
       {messages.map(message => (

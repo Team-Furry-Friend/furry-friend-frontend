@@ -9,7 +9,7 @@
 		-webkit-appearance: none;
 	}
 
-	input {
+	input, textarea {
 		@apply bg-transparent
 	}
 

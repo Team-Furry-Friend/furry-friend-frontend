@@ -45,7 +45,7 @@ const LikeBtn = ({ basket, at, pid }: LikeBtnProps) => {
     <button
       disabled={isLoading}
       onClick={onClick}
-      className='mx-auto rounded flex items-center gap-2 p-1 bg-white disabled:bg-gray-200 hover:bg-gray-200'
+      className='mx-auto rounded flex items-center gap-2 p-1 bg-white dark:bg-gray-800 disabled:bg-gray-200 hover:bg-gray-200 dark:disabled:bg-gray-600 dark:hover:bg-gray-600'
     >
       {basket ? (
         <AiFillHeart size={24} className='text-red-400' />
