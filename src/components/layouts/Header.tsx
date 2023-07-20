@@ -15,7 +15,7 @@ const font = Bevan({
 
 const Header = () => {
   return (
-    <header className='shadow sticky top-0 bg-white z-10'>
+    <header className='shadow sticky top-0 bg-white dark:bg-gray-800 z-10'>
       <div className='max-w-6xl mx-auto px-2 md:px-4 flex justify-between items-center'>
         <h1 className='py-2 md:py-4 '>
           <Link
@@ -39,7 +39,7 @@ const Header = () => {
 
           <Link
             href={'/chats'}
-            className='flex gap-2 items-center px-2 md:px-4 h-full bg-white hover:bg-gray-200'
+            className='flex gap-2 items-center px-2 md:px-4 h-full bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600'
           >
             <BsChatDots size={24} />
 

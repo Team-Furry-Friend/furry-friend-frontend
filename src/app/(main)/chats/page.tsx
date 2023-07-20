@@ -8,13 +8,21 @@ const Page = async () => {
   const at = cookieStore.get('access_token')?.value;
 
   if (!at) {
-    return <Auth />;
+    return (
+      <div className='px-2'>
+        <Auth />
+      </div>
+    );
   }
 
   const tokenResponse = await auth.getToken(at);
 
   if (tokenResponse.status !== 'success') {
-    return <Auth />;
+    return (
+      <div className='px-2'>
+        <Auth />
+      </div>
+    );
   }
 
   return (

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import Modal from '@/components/layouts/Modal';
+import { cookies } from 'next/headers';
 
 const baseFont = Inter({ subsets: ['latin'] });
 
@@ -27,9 +28,14 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme')?.value;
+
   return (
-    <html lang='kr'>
-      <body className={`${baseFont.className} bg-white`}>
+    <html lang='kr' className={theme || 'light'}>
+      <body
+        className={`${baseFont.className} bg-white dark:bg-gray-800 text-black dark:text-white`}
+      >
         <Modal />
         {children}
       </body>

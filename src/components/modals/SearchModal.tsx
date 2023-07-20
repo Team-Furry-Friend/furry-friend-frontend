@@ -29,7 +29,7 @@ const SearchModal = () => {
     <form onSubmit={onSubmit} className='flex flex-col'>
       <div className='p-2 md:p-4 flex flex-col gap-4'>
         <h2 className='font-bold text-xl'>검색하기</h2>
-        <div className='p-2 border rounded-full flex gap-4 items-center'>
+        <div className='py-2 px-4 border rounded-full flex gap-4 items-center'>
           <input
             ref={inputRef}
             onChange={e => setKeyword(e.target.value)}

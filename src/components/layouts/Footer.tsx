@@ -10,7 +10,7 @@ const font = Bevan({
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-100'>
+    <footer className='bg-gray-100 dark:bg-gray-700 border-t'>
       <div className='max-w-6xl mx-auto px-2 md:px-4 py-8 flex flex-col gap-4 items-start'>
         <div className='flex flex-wrap gap-4 items-center'>
           <div

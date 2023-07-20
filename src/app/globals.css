@@ -9,6 +9,10 @@
 		-webkit-appearance: none;
 	}
 
+	input {
+		@apply bg-transparent
+	}
+
 	input:focus {
 		@apply outline-none;
 	}

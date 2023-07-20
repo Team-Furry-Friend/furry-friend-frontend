@@ -11,7 +11,7 @@ const font = Bevan({
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className='flex'>
-      <div className='md:w-1/2 bg-gray-100 hidden lg:flex justify-center items-center'>
+      <div className='md:w-1/2 bg-gray-100 dark:bg-gray-600 hidden lg:flex justify-center items-center'>
         <h2 className='text-3xl'>Furry Friend에 오신 것을 환영해요!</h2>
       </div>
       <div className='w-full lg:w-1/2 min-h-[100dvh] flex justify-center items-center p-2 md:p-4'>

@@ -26,7 +26,7 @@ const AuthMenus = async () => {
         <li key={menu.title}>
           <Link
             href={menu.href}
-            className='h-full flex items-center px-2 md:px-4 bg-white hover:bg-gray-200'
+            className='h-full flex items-center px-2 md:px-4 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600'
           >
             {menu.title}
           </Link>

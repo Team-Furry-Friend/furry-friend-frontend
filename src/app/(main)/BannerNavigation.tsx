@@ -25,7 +25,7 @@ const BannerNavigation = ({
         >
           <BsArrowLeftShort
             size={32}
-            className='text-blue-400 group-disabled:text-gray-200'
+            className='text-blue-400 group-disabled:text-gray-200 dark:group-disabled:text-gray-600'
           />
         </button>
         <div className='w-[1px] h-8 bg-blue-400' />
@@ -36,7 +36,7 @@ const BannerNavigation = ({
         >
           <BsArrowRightShort
             size={32}
-            className='text-blue-400 group-disabled:text-gray-200'
+            className='text-blue-400 group-disabled:text-gray-200 dark:group-disabled:text-gray-600'
           />
         </button>
       </div>

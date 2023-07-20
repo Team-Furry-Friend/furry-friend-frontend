@@ -20,7 +20,7 @@ const Page = () => {
 
       <div className='my-4 relative'>
         <div className='h-[1px] bg-gray-200' />
-        <p className='absolute left-1/2 -translate-x-1/2 top-0 -translate-y-[calc(50%-1px)] bg-white px-2 text-gray-400'>
+        <p className='absolute left-1/2 -translate-x-1/2 top-0 -translate-y-[calc(50%-1px)] bg-white dark:bg-gray-800 px-2 text-gray-400'>
           소셜 로그인
         </p>
       </div>
