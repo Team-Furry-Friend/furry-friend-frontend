@@ -31,7 +31,7 @@ const Page = async () => {
       <Link href={'/'} className='block w-fit'>
         <AiOutlineArrowLeft
           size={32}
-          className='border border-black rounded-full p-1'
+          className='border border-black dark:border-white rounded-full p-1'
         />
       </Link>
 
