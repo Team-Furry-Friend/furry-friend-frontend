@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { authMenus } from '@/datas/menuData';
 import LogoutBtn from '@/components/buttons/LogoutBtn';
 import { auth } from '@/libs/api';
+import { BsArrowUpCircle } from 'react-icons/bs';
 
 const AuthMenus = async () => {
   const cookieStore = cookies();
@@ -13,7 +14,16 @@ const AuthMenus = async () => {
 
     if (tokenResponse.status === 'success') {
       return (
-        <div className='pl-2 md:pl-4'>
+        <div className='border-l border-gray-400 flex gap-2 h-full items-center'>
+          <Link
+            href={'/upload'}
+            className='h-full flex items-center gap-2 px-2 md:px-4 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600'
+          >
+            <BsArrowUpCircle size={24} />
+
+            <span className='hidden md:block'>상품 올리기</span>
+          </Link>
+
           <LogoutBtn />
         </div>
       );
@@ -21,7 +31,7 @@ const AuthMenus = async () => {
   }
 
   return (
-    <ul className='flex h-full'>
+    <ul className='border-l border-gray-400 flex h-full'>
       {authMenus.map(menu => (
         <li key={menu.title}>
           <Link
