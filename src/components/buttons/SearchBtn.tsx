@@ -17,7 +17,7 @@ const SearchBtn = () => {
       className='h-full flex gap-2 px-2 md:px-4 items-center bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600'
     >
       <BsSearch size={20} />
-      <span className='hidden md:block'>검색</span>
+      <span className='hidden md:block w-8'>검색</span>
     </button>
   );
 };
