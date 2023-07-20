@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { auth } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
+import Cookies from 'js-cookie';
 
 type PageParams = {
   params: { provider: string };
@@ -23,9 +24,22 @@ const Page = ({ params: { provider }, searchParams: { code } }: PageParams) => {
 
     (async () => {
       try {
-        const response = await auth.signInWithSocial({ provider, code });
+        const { data } = await auth.signInWithSocial({ provider, code });
 
-        // TODO: 백엔드 redirect_uri 수정해야한다고 말하고 성공시 at, rt를 쿠키로 저장해야함
+        if (!data) {
+          throw new Error('소셜 로그인 실패!');
+        }
+
+        Cookies.set('access_token', data.accessToken.replace('Bearer ', ''), {
+          expires: 7,
+        });
+
+        Cookies.set('refresh_token', data.refreshToken.replace('Bearer ', ''), {
+          expires: 30,
+        });
+
+        router.push('/');
+        router.refresh();
       } catch (e) {
         setModal(<NoticeModal texts={['소셜 로그인에 실패했습니다.']} />);
 

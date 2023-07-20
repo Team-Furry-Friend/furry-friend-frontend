@@ -215,8 +215,11 @@ export interface ChatRoomResponseDTO {
   chatDel: boolean;
 }
 
-// TODO: Type 수정해야함
 export interface SocialResponse {
   statusCode: number;
   status: string;
+  data?: {
+    accessToken: string;
+    refreshToken: string;
+  };
 }
