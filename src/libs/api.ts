@@ -10,6 +10,7 @@ import {
   ProductDetailResponse,
   ProductListResponse,
   RegisterResponse,
+  SocialResponse,
   TokenResponse,
 } from '@/types';
 import Cookies from 'js-cookie';
@@ -70,6 +71,24 @@ export const auth = {
 
   async signUp(fields: RegisterFields) {
     const { data } = await api.post<RegisterResponse>('/member/join', fields);
+
+    return data;
+  },
+
+  async signInWithSocial({
+    code,
+    provider,
+  }: {
+    code: string;
+    provider: string;
+  }) {
+    const { data } = await api.get<SocialResponse>(
+      `/oauth2/${provider}?code=${code}`
+    );
+
+    if (data.status !== 'success') {
+      throw new Error();
+    }
 
     return data;
   },
