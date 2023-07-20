@@ -6,7 +6,7 @@ interface AuthProps {
 
 const Auth = ({ type }: AuthProps) => {
   return (
-    <div className='min-h-[calc(100dvh-80px)] md:min-h-[calc(100dvh-96px)] max-w-2xl w-full flex justify-center items-center'>
+    <div className='min-h-[calc(100dvh-80px)] md:min-h-[calc(100dvh-96px)] max-w-2xl w-full flex justify-center items-center mx-auto'>
       <div className='border rounded flex flex-col items-center gap-4 p-4 w-full'>
         <p className='font-bold text-xl text-center'>
           지금 가입하고 <br />{' '}
