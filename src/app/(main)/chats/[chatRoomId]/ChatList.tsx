@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { MessageData } from '@/types';
 import { getDateDiff } from '@/libs/getDateDiff';
+import ChatListItem from '@/components/items/ChatListItem';
 
 interface ChatListProps {
   messages: MessageData[];
@@ -21,28 +22,11 @@ const ChatList = ({
       ref={setChatListElement}
     >
       {messages.map(message => (
-        <li
+        <ChatListItem
           key={message.chatMessageId}
-          className={`flex flex-col ${
-            memberId === message.chatMessageSenderId ? 'items-end' : ''
-          } gap-2 p-2`}
-        >
-          {memberId !== message.chatMessageSenderId && (
-            <p className='font-bold'>{message.chatMessageSerderName}</p>
-          )}
-          <p
-            className={`p-2 shadow font-bold rounded w-fit ${
-              memberId === message.chatMessageSenderId
-                ? 'bg-blue-400 text-white rounded-tr-none'
-                : 'bg-white rounded-tl-none'
-            }`}
-          >
-            {message.chatMessageContent}
-          </p>
-          <p className='text-gray-500 text-sm'>
-            {getDateDiff(message.regDate)}
-          </p>
-        </li>
+          message={message}
+          memberId={memberId}
+        />
       ))}
     </ul>
   );
