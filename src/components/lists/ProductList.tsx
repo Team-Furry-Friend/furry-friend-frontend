@@ -4,7 +4,11 @@ import { cookies } from 'next/headers';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 import { auth, baskets, products } from '@/libs/api';
 
-const ProductList = async () => {
+const ProductList = async ({
+  disabledScroll,
+}: {
+  disabledScroll?: boolean;
+}) => {
   const cookieStore = cookies();
   const at = cookieStore.get('access_token')?.value;
 
@@ -23,7 +27,7 @@ const ProductList = async () => {
             ))}
         </ul>
 
-        <InfiniteScroll initialPage={2} />
+        {!disabledScroll && <InfiniteScroll initialPage={2} />}
       </>
     );
   }
@@ -47,7 +51,7 @@ const ProductList = async () => {
             ))}
         </ul>
 
-        <InfiniteScroll initialPage={2} />
+        {!disabledScroll && <InfiniteScroll initialPage={2} />}
       </>
     );
   }
@@ -66,7 +70,9 @@ const ProductList = async () => {
         ))}
       </ul>
 
-      <InfiniteScroll userBaskets={basketResponse.data} initialPage={2} />
+      {!disabledScroll && (
+        <InfiniteScroll userBaskets={basketResponse.data} initialPage={2} />
+      )}
     </>
   );
 };
