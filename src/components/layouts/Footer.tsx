@@ -3,6 +3,7 @@ import { Bevan } from 'next/font/google';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import ThemeSwitchBtn from '@/components/buttons/ThemeSwitchBtn';
+import { cookies } from 'next/headers';
 
 const font = Bevan({
   weight: '400',
@@ -10,6 +11,9 @@ const font = Bevan({
 });
 
 const Footer = () => {
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme')?.value;
+
   return (
     <footer className='bg-gray-100 dark:bg-gray-700 border-t'>
       <div className='max-w-6xl mx-auto px-2 md:px-4 py-8 flex flex-col gap-4 items-start'>
@@ -46,7 +50,7 @@ const Footer = () => {
         </div>
 
         <div className='w-full flex justify-end gap-2 items-center'>
-          <ThemeSwitchBtn />
+          <ThemeSwitchBtn theme={theme} />
           <Link
             href={'https://github.com/kkukileon305/furry-friend'}
             target='_blank'
