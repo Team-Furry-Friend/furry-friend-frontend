@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import LoginForm from '@/app/(auth)/login/LoginForm';
 import Link from 'next/link';
-import Image from 'next/image';
 import KakaoLogin from '@/app/(auth)/login/KakaoLogin';
 
 export const metadata: Metadata = {
