@@ -26,15 +26,9 @@ const Page = ({
   };
 }) => {
   return (
-    <div className='w-full'>
-      <h2 className='font-bold text-2xl my-4'>
-        {decodeURIComponent(params.type)}
-      </h2>
-
-      <Suspense fallback={<ProductListSkeleton />}>
-        <List type={params.type} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<ProductListSkeleton />}>
+      <List type={params.type} />
+    </Suspense>
   );
 };
 

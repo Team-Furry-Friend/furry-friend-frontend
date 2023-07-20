@@ -19,7 +19,7 @@ const Modal = () => {
     <div
       className={`${
         modal ? 'fixed' : 'hidden'
-      } z-20 bg-black/50 w-full h-full flex justify-center items-center p-2 md:p-4`}
+      } z-30 bg-black/50 w-full h-full flex justify-center items-center p-2 md:p-4`}
       onClick={handleClose}
     >
       <div className='bg-white dark:bg-gray-800 rounded max-w-xl w-full overflow-hidden'>
