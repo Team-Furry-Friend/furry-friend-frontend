@@ -122,7 +122,7 @@ const EditForm = ({ at, detail }: EditFormProps) => {
       </label>
 
       <div>
-        <h2>이미지</h2>
+        <h2 className={'mb-2'}>이미지</h2>
 
         <ul className='flex gap-4 flex-wrap'>
           {detail.imageDTOList.map(image => (

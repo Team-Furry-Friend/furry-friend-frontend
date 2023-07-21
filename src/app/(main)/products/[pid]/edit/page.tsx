@@ -56,7 +56,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
       <Link href={`../${detail.pid}`} className='block w-fit'>
         <AiOutlineArrowLeft
           size={32}
-          className='border border-black rounded-full p-1'
+          className='border border-black dark:border-white rounded-full p-1'
         />
       </Link>
 
