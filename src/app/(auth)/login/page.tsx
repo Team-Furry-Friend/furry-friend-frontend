@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import LoginForm from '@/app/(auth)/login/LoginForm';
 import Link from 'next/link';
 import KakaoLogin from '@/app/(auth)/login/KakaoLogin';
+import NaverLogin from '@/app/(auth)/login/NaverLogin';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -25,8 +26,9 @@ const Page = () => {
         </p>
       </div>
 
-      <div className='flex justify-center'>
+      <div className='flex flex-col gap-2 items-center justify-center'>
         <KakaoLogin />
+        <NaverLogin />
       </div>
     </>
   );
