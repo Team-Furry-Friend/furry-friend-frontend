@@ -28,7 +28,7 @@ const Page = async () => {
 
   return (
     <div className='w-full flex flex-col gap-8'>
-      <Link href={'/'} className='block w-fit'>
+      <Link href={'/products'} className='block w-fit'>
         <AiOutlineArrowLeft
           size={32}
           className='border border-black dark:border-white rounded-full p-1'
