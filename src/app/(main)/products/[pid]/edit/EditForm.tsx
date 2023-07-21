@@ -88,7 +88,7 @@ const EditForm = ({ at, detail }: EditFormProps) => {
                 className={`p-2 border rounded cursor-pointer ${
                   watch('pcategory') === category
                     ? 'border-blue-400 bg-blue-400 text-white'
-                    : 'bg-white text-gray-400 hover:bg-blue-200'
+                    : 'bg-white dark:bg-gray-800 text-gray-400 hover:bg-blue-200'
                 }`}
               >
                 {category}
