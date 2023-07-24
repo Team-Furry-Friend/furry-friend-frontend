@@ -233,7 +233,7 @@ export interface User {
 export interface SocialResponse {
   statusCode: number;
   status: string;
-  data?: Tokens & User;
+  data?: Partial<Tokens> & User;
 }
 
 export interface EditProfileResponse {

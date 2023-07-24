@@ -122,9 +122,7 @@ export const auth = {
   },
 
   async editProfile(params: ProfileFields) {
-    const { data } = await api.patch<EditProfileResponse>(
-      `/oauth2?mid=${params.mid}&name=${params.name}&address=${params.address}&phone=${params.phone}`
-    );
+    const { data } = await api.patch<EditProfileResponse>(`/oauth2`, params);
 
     return data;
   },

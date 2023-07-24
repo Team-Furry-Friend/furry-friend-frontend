@@ -31,7 +31,7 @@ const Page = ({ params: { provider }, searchParams: { code } }: PageParams) => {
           throw new Error();
         }
 
-        if (data.name) {
+        if (data.accessToken && data.refreshToken) {
           Cookies.set('access_token', data.accessToken.replace('Bearer ', ''), {
             expires: 7,
           });
@@ -51,7 +51,9 @@ const Page = ({ params: { provider }, searchParams: { code } }: PageParams) => {
           router.refresh();
         }
       } catch (e) {
-        setModal(<NoticeModal texts={['소셜 로그인에 실패했습니다.']} />);
+        setModal(
+          <NoticeModal texts={['다른 소셜 계정으로 가입되어있습니다.']} />
+        );
 
         router.push('/login');
       }
