@@ -215,11 +215,30 @@ export interface ChatRoomResponseDTO {
   chatDel: boolean;
 }
 
+export interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface User {
+  mid: number;
+  email: string;
+  name: string | null;
+  address: string;
+  phone: string;
+  social: string;
+  del: false;
+}
+
 export interface SocialResponse {
   statusCode: number;
   status: string;
-  data?: {
-    accessToken: string;
-    refreshToken: string;
-  };
+  data?: Tokens & User;
+}
+
+export interface EditProfileResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data?: Tokens;
 }

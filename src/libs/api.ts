@@ -5,6 +5,7 @@ import {
   ChatRoomsResponse,
   CommentResponse,
   CreateChatRoomResponse,
+  EditProfileResponse,
   LoginResponse,
   PopularityResponse,
   ProductDetailResponse,
@@ -33,6 +34,14 @@ type Credentials = {
 type RegisterFields = {
   email: string;
   mpw: string;
+  name: string;
+  address: string;
+  phone: string;
+  agreement: boolean;
+};
+
+type ProfileFields = {
+  mid: string;
   name: string;
   address: string;
   phone: string;
@@ -110,6 +119,14 @@ export const auth = {
     Cookies.set('refresh_token', '', {
       expires: 0,
     });
+  },
+
+  async editProfile(params: ProfileFields) {
+    const { data } = await api.patch<EditProfileResponse>(
+      `/oauth2?mid=${params.mid}&name=${params.name}&address=${params.address}&phone=${params.phone}`
+    );
+
+    return data;
   },
 };
 

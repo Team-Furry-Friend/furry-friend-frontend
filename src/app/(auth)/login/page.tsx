@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
 import LoginForm from '@/app/(auth)/login/LoginForm';
 import Link from 'next/link';
-import KakaoLogin from '@/app/(auth)/login/KakaoLogin';
-import NaverLogin from '@/app/(auth)/login/NaverLogin';
+import SocialLogin, { Provider } from '@/app/(auth)/login/SocialLogin';
 
 export const metadata: Metadata = {
   title: 'Login',
 };
+
+const socials: Provider[] = ['naver', 'kakao', 'google'];
 
 const Page = () => {
   return (
@@ -27,8 +28,9 @@ const Page = () => {
       </div>
 
       <div className='flex flex-col gap-2 items-center justify-center'>
-        <KakaoLogin />
-        <NaverLogin />
+        {socials.map(socialProvider => (
+          <SocialLogin key={socialProvider} provider={socialProvider} />
+        ))}
       </div>
     </>
   );

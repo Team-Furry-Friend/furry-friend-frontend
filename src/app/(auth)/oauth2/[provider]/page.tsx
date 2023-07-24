@@ -7,6 +7,7 @@ import { auth } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import Cookies from 'js-cookie';
+import { isTokens } from '@/libs/isTokens';
 
 type PageParams = {
   params: { provider: string };
@@ -27,19 +28,28 @@ const Page = ({ params: { provider }, searchParams: { code } }: PageParams) => {
         const { data } = await auth.signInWithSocial({ provider, code });
 
         if (!data) {
-          throw new Error('소셜 로그인 실패!');
+          throw new Error();
         }
 
-        Cookies.set('access_token', data.accessToken.replace('Bearer ', ''), {
-          expires: 7,
-        });
+        if (data.name) {
+          Cookies.set('access_token', data.accessToken.replace('Bearer ', ''), {
+            expires: 7,
+          });
 
-        Cookies.set('refresh_token', data.refreshToken.replace('Bearer ', ''), {
-          expires: 30,
-        });
+          Cookies.set(
+            'refresh_token',
+            data.refreshToken.replace('Bearer ', ''),
+            {
+              expires: 30,
+            }
+          );
 
-        router.push('/');
-        router.refresh();
+          router.push('/');
+          router.refresh();
+        } else {
+          router.push(`/profile?mid=${data.mid}`);
+          router.refresh();
+        }
       } catch (e) {
         setModal(<NoticeModal texts={['소셜 로그인에 실패했습니다.']} />);
 
