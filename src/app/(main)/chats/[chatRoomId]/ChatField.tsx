@@ -1,18 +1,17 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import SockJS from 'sockjs-client';
-import { CompatClient, Stomp } from '@stomp/stompjs';
 import ChatForm from '@/app/(main)/chats/[chatRoomId]/ChatForm';
 import ChatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
-import { MessageData, MessageResponse } from '@/types';
 import ChatSkeleton from '@/components/skeletons/ChatSkeleton';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
-import { useRouter } from 'next/navigation';
-import { chats } from '@/libs/api';
-import { convertUtcToKst } from '@/libs/convertUtcToKst';
-import chatList from '@/app/(main)/chats/[chatRoomId]/ChatList';
 import { useChats } from '@/hooks/useChats';
+import { useRef } from 'react';
+import { convertUtcToKst } from '@/libs/convertUtcToKst';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { MessageData } from '@/types';
+import { chats } from '@/libs/api';
+import ChatListItem from '@/components/items/ChatListItem';
+import { toReversed } from '@/libs/toReversed';
 
 interface ChatFieldProps {
   at: string;
@@ -28,6 +27,16 @@ const ChatField = ({ chatRoomId, rt, memberId, at }: ChatFieldProps) => {
     rt,
   });
 
+  const curDate = useRef<string>(
+    convertUtcToKst(new Date()).toISOString().split('Z')[0]
+  );
+
+  const { postsGroup, setSpinner } = useInfiniteScroll<MessageData>({
+    fetcher: page =>
+      chats.getMessages({ chatRoomId, at, page, startTime: curDate.current }),
+    viewPerPage: 10,
+  });
+
   const { setChatListElement } = useAutoScroll();
 
   if (!isConnected || !stompClient.current) {
@@ -36,11 +45,39 @@ const ChatField = ({ chatRoomId, rt, memberId, at }: ChatFieldProps) => {
 
   return (
     <div className='h-[calc(100%-41px)] md:h-[calc(100%-57px)]'>
-      <ChatList
-        messages={messages}
-        memberId={memberId}
-        setChatListElement={setChatListElement}
-      />
+      <div
+        className='h-[calc(100%-48px)] overflow-y-scroll bg-gray-200 dark:bg-gray-600'
+        ref={setChatListElement}
+      >
+        <ul className='p-2' ref={setSpinner}>
+          <li className='flex flex-col gap-2 mb-4'>
+            <div className='bg-gray-300 w-16 h-6 rounded animate-pulse' />
+            <div className='bg-gray-300 w-32 h-24 rounded animate-pulse' />
+          </li>
+
+          <li className='flex flex-col gap-2 items-end mb-4'>
+            <div className='bg-gray-300 w-32 h-24 rounded animate-pulse' />
+          </li>
+
+          <li className='flex flex-col gap-2'>
+            <div className='bg-gray-300 w-16 h-6 rounded animate-pulse' />
+            <div className='bg-gray-300 w-24 h-12 rounded animate-pulse' />
+          </li>
+        </ul>
+
+        <ul>
+          {toReversed(postsGroup).map(messages =>
+            toReversed(messages).map(message => (
+              <ChatListItem
+                key={message.chatMessageId}
+                message={message}
+                memberId={memberId}
+              />
+            ))
+          )}
+        </ul>
+        <ChatList messages={messages} memberId={memberId} />
+      </div>
       <ChatForm
         stompClient={stompClient.current}
         chatRoomId={chatRoomId}

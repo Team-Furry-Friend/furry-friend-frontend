@@ -19,7 +19,7 @@ const InfiniteScroll = ({
   keyword,
   type,
 }: InfiniteScrollProps) => {
-  const { postsGroup, spinnerRef } = useInfiniteScroll<DtoList>({
+  const { postsGroup, setSpinner } = useInfiniteScroll<DtoList>({
     fetcher: (page: number) =>
       products.get({
         page,
@@ -50,7 +50,7 @@ const InfiniteScroll = ({
 
       <ul
         className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8'
-        ref={spinnerRef}
+        ref={setSpinner}
       >
         {[...new Array(16)].fill(0).map((_, key) => (
           <li

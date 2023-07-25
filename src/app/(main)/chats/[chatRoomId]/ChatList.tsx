@@ -8,19 +8,11 @@ import ChatListItem from '@/components/items/ChatListItem';
 interface ChatListProps {
   messages: MessageData[];
   memberId: number;
-  setChatListElement: Dispatch<SetStateAction<HTMLUListElement | null>>;
 }
 
-const ChatList = ({
-  messages,
-  memberId,
-  setChatListElement,
-}: ChatListProps) => {
+const ChatList = ({ messages, memberId }: ChatListProps) => {
   return (
-    <ul
-      className='h-[calc(100%-48px)] overflow-y-scroll bg-gray-200 dark:bg-gray-600'
-      ref={setChatListElement}
-    >
+    <ul>
       {messages.map(message => (
         <ChatListItem
           key={message.chatMessageId}

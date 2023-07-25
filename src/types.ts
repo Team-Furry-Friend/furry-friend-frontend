@@ -247,10 +247,10 @@ export interface MessageListResponse {
   statusCode: number;
   status: string;
   message: string;
-  data: MessageList;
+  data: MessageListData;
 }
 
-export interface MessageList {
+export interface MessageListData {
   dtoList: MessageData[];
   totalPage: number;
   page: number;

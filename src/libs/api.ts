@@ -300,7 +300,7 @@ export const chats = {
       {
         params: {
           page,
-          size: 30,
+          size: 10,
           time: startTime.toString(),
         },
 
@@ -310,6 +310,6 @@ export const chats = {
       }
     );
 
-    return data.data;
+    return data.data.dtoList;
   },
 };

@@ -15,7 +15,7 @@ const useInfiniteScroll = <T>({
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
 
-  const spinnerRef = useRef<HTMLUListElement>(null);
+  const [spinner, setSpinner] = useState<HTMLUListElement | null>(null);
   const page = useRef(initialPage);
 
   useEffect(() => {
@@ -32,20 +32,24 @@ const useInfiniteScroll = <T>({
 
         if (fetchedPosts.length < viewPerPage) {
           setIsEnd(true);
-          spinnerRef.current!.style.display = 'none';
+          spinner!.style.display = 'none';
         }
 
         setIsLoading(false);
       }
     });
 
-    spinnerRef.current && observer.observe(spinnerRef.current);
-  }, []);
+    spinner && observer.observe(spinner);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [spinner]);
 
   return {
     postsGroup,
     isLoading,
-    spinnerRef,
+    setSpinner,
     isEnd,
     page,
   };
