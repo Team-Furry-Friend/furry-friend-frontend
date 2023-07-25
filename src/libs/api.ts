@@ -275,6 +275,7 @@ export const chats = {
         Authorization: `Bearer ${rt}`,
       },
     });
+
     return data;
   },
 

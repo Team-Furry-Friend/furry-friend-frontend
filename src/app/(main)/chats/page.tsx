@@ -32,6 +32,7 @@ const Page = async () => {
       </div>
 
       <div className='w-full h-full block md:hidden'>
+        <p className='px-2 py-4 font-bold border-b'>채팅</p>
         <ChatRoomList />
       </div>
     </div>

@@ -186,6 +186,7 @@ export interface ChatRoomsResponse {
 export interface ChatRoomsData {
   chatMessageResponseDTO: ChatMessageResponseDTO;
   chatParticipantsResponseDTO: ChatParticipantsResponseDTO;
+  notReadCount: number;
 }
 
 export interface ChatMessageResponseDTO {
