@@ -6,6 +6,10 @@ export const useAutoScroll = () => {
 
   useEffect(() => {
     if (chatListElement) {
+      chatListElement.scroll({
+        top: chatListElement.scrollHeight,
+      });
+
       const observer = new MutationObserver(mutations => {
         const target = mutations[0].target as HTMLUListElement;
 
@@ -26,5 +30,6 @@ export const useAutoScroll = () => {
 
   return {
     setChatListElement,
+    chatListElement,
   };
 };

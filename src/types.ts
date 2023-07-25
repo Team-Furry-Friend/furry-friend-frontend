@@ -242,3 +242,22 @@ export interface EditProfileResponse {
   message: string;
   data?: Tokens;
 }
+
+export interface MessageListResponse {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: MessageList;
+}
+
+export interface MessageList {
+  dtoList: MessageData[];
+  totalPage: number;
+  page: number;
+  size: number;
+  start: number;
+  end: number;
+  prev: boolean;
+  next: boolean;
+  pageList: number[];
+}

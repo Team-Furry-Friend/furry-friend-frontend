@@ -64,6 +64,7 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
         memberId={tokenResponse.data.memberId}
         chatRoomId={params.chatRoomId}
         rt={rt}
+        at={at}
       />
     </div>
   );

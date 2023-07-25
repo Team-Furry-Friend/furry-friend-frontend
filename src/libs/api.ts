@@ -7,6 +7,7 @@ import {
   CreateChatRoomResponse,
   EditProfileResponse,
   LoginResponse,
+  MessageListResponse,
   PopularityResponse,
   ProductDetailResponse,
   ProductListResponse,
@@ -281,5 +282,34 @@ export const chats = {
     const { data } = await api.post<CreateChatRoomResponse>('/chats', options);
 
     return data;
+  },
+
+  async getMessages({
+    startTime,
+    page,
+    chatRoomId,
+    at,
+  }: {
+    chatRoomId: string;
+    page: number;
+    startTime: string;
+    at: string;
+  }) {
+    const { data } = await api.get<MessageListResponse>(
+      `/chats/${chatRoomId}`,
+      {
+        params: {
+          page,
+          size: 30,
+          time: startTime.toString(),
+        },
+
+        headers: {
+          Authorization: `Bearer ${at}`,
+        },
+      }
+    );
+
+    return data.data;
   },
 };

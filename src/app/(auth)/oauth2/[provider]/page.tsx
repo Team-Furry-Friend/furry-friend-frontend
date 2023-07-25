@@ -7,7 +7,6 @@ import { auth } from '@/libs/api';
 import { useModal } from '@/store/modalStore';
 import NoticeModal from '@/components/modals/NoticeModal';
 import Cookies from 'js-cookie';
-import { isTokens } from '@/libs/isTokens';
 
 type PageParams = {
   params: { provider: string };
