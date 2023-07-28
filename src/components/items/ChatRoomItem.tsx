@@ -21,7 +21,7 @@ const ChatRoomItem = ({ room, tokenResponse }: ChatRoomItemProps) => {
           chatRoomId ===
           room.chatParticipantsResponseDTO.chatRoomResponseDTO.chatRoomId.toString()
             ? 'bg-blue-400 text-white'
-            : 'bg-white dark:bg-gray-800'
+            : 'bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600'
         }`}
       >
         <div className='flex justify-between'>
@@ -46,9 +46,11 @@ const ChatRoomItem = ({ room, tokenResponse }: ChatRoomItemProps) => {
           >
             {room.chatMessageResponseDTO.chatMessageContent}
           </p>
-          <p className='bg-red-400 text-white rounded-full px-1'>
-            {room.notReadCount}
-          </p>
+          {room.notReadCount !== 0 && (
+            <p className='bg-red-400 text-white rounded-full px-1'>
+              {room.notReadCount}
+            </p>
+          )}
         </div>
       </Link>
     </li>

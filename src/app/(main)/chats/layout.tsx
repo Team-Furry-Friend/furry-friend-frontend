@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <div className='hidden md:flex flex-col border-r w-64'>
           <p className='px-2 py-4 font-bold border-b'>채팅</p>
 
-          <div className='overflow-y-scroll'>
+          <div className='overflow-y-scroll h-[calc(100%-57px)]'>
             <Suspense fallback={<ChatRoomsSkeleton />}>
               <ChatRoomList />
             </Suspense>

@@ -1,8 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction } from 'react';
 import { MessageData } from '@/types';
-import { getDateDiff } from '@/libs/getDateDiff';
 import ChatListItem from '@/components/items/ChatListItem';
 
 interface ChatListProps {

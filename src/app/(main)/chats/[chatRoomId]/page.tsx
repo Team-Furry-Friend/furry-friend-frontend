@@ -54,10 +54,6 @@ const Page = async ({ params }: { params: { chatRoomId: string } }) => {
         <h2 className='font-bold'>
           {tokenResponse.data.memberName === targetName ? userName : targetName}
         </h2>
-
-        <button>
-          <BsTrash size={24} />
-        </button>
       </div>
 
       <ChatField

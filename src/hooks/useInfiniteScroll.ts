@@ -4,12 +4,14 @@ interface useInfiniteScrollProps<G> {
   fetcher: (page: number) => Promise<G[]>;
   viewPerPage: number;
   initialPage?: number;
+  onFetched?: (data: G[]) => void;
 }
 
 const useInfiniteScroll = <T>({
   fetcher,
   viewPerPage,
   initialPage = 1,
+  onFetched,
 }: useInfiniteScrollProps<T>) => {
   const [postsGroup, setPostsGroup] = useState<T[][]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +29,8 @@ const useInfiniteScroll = <T>({
       ) {
         setIsLoading(true);
         const fetchedPosts = (await fetcher(page.current++)) as T[];
+
+        onFetched && onFetched(fetchedPosts);
 
         setPostsGroup(prev => [...prev, fetchedPosts]);
 
@@ -52,6 +56,7 @@ const useInfiniteScroll = <T>({
     setSpinner,
     isEnd,
     page,
+    setPostsGroup,
   };
 };
 
