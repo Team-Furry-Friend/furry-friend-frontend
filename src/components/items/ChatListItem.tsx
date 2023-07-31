@@ -4,9 +4,10 @@ import { MessageData } from '@/types';
 interface ChatListItemProps {
   message: MessageData;
   memberId: number;
+  isHttp?: boolean;
 }
 
-const ChatListItem = ({ memberId, message }: ChatListItemProps) => {
+const ChatListItem = ({ memberId, message, isHttp }: ChatListItemProps) => {
   return (
     <li
       key={message.chatMessageId}
@@ -26,7 +27,13 @@ const ChatListItem = ({ memberId, message }: ChatListItemProps) => {
       >
         {message.chatMessageContent}
       </p>
-      <p className='text-gray-500 text-sm'>{getDateDiff(message.regDate)}</p>
+
+      <div className='flex items-center gap-2'>
+        <p className='text-gray-500 text-sm'>{getDateDiff(message.regDate)}</p>
+        {!isHttp && !message.chatMessageRead && (
+          <span className='w-1 block aspect-square rounded-full bg-yellow-400' />
+        )}
+      </div>
     </li>
   );
 };

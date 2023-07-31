@@ -48,6 +48,22 @@ export const useChats = ({ chatRoomId, rt, memberId }: UseChatProps) => {
 
           setMessages(prev => [...prev, message.data]);
         });
+
+        stompClient.current?.subscribe(
+          `/sub/chats/read/${chatRoomId}`,
+          response => {
+            const successes = JSON.parse(response.body) as number[];
+
+            setMessages(prev =>
+              prev.map(message => ({
+                ...message,
+                chatMessageRead: message.chatMessageRead
+                  ? true
+                  : successes.includes(message.chatMessageId),
+              }))
+            );
+          }
+        );
       }
     );
 

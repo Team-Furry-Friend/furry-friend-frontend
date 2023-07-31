@@ -86,6 +86,7 @@ const ChatField = ({ chatRoomId, rt, memberId, at }: ChatFieldProps) => {
                 key={message.chatMessageId}
                 message={message}
                 memberId={memberId}
+                isHttp
               />
             ))
           )}
