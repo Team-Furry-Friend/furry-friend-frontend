@@ -110,7 +110,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
                 className='rounded cursor-pointer bg-white dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-600'
                 size={32}
               />
-              <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block pt-1'>
+              <ul className='absolute top-full right-0 rounded overflow-hidden shadow hidden group-hover:block'>
                 <li>
                   <RemoveBtn pid={detail.pid} at={at} />
                 </li>
