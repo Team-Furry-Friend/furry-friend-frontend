@@ -217,6 +217,10 @@ const UploadForm = ({ at, memberId }: UploadFormProps) => {
         <textarea
           {...register('pexplain', {
             required: '상품 설명을 입력해주세요.',
+            maxLength: {
+              value: 300,
+              message: '내용은 300자 이하로 입력해주세요.',
+            },
           })}
           className='border rounded p-2 focus:outline-none resize-none'
           placeholder='상품 설명...'
