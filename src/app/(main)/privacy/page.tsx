@@ -16,7 +16,7 @@ const Page = () => {
     <div className='center'>
       <h2 className='font-bold text-2xl my-8'>개인정보 처리방침</h2>
 
-      <div className='bg-gray-200 p-2 rounded'>
+      <div className='bg-gray-200 dark:bg-gray-600 p-2 rounded'>
         <ul className='flex flex-col gap-8'>
           {privacies.map(policy => (
             <li key={policy.title}>
