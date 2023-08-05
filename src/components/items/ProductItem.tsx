@@ -28,7 +28,7 @@ const ProductItem = ({ item }: { item: DtoList }) => {
           <p className='bg-white dark:bg-gray-800 text-gray-400 text-sm p-1 border rounded w-fit'>
             {item.pcategory}
           </p>
-          <h4 className='font-bold'>{item.pname}</h4>
+          <h4 className='font-bold truncate'>{item.pname}</h4>
         </div>
         <p className='font-bold'>{item.pprice}원</p>
         <p className='text-gray-400'>{getDateDiff(item.regDate)}</p>
