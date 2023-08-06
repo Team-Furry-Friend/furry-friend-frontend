@@ -30,7 +30,7 @@ const ImageList = ({
       {files.map(file => (
         <li
           key={file.name}
-          className='w-[calc(50%-8px)] md:w-[calc((100%-48px)/4)] flex justify-center relative rounded-xl overflow-hidden'
+          className='w-[calc(50%-8px)] md:w-[calc((100%-48px)/4)] flex justify-center relative rounded overflow-hidden'
         >
           <Image
             src={URL.createObjectURL(file)}
