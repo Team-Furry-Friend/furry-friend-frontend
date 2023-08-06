@@ -47,10 +47,10 @@ const Header = () => {
           >
             <Image
               src='/icons/chinchilla.png'
-              alt='logo'
+              alt='furry friend logo'
               width={50}
               height={50}
-              className='w-8'
+              className='w-8 dark:invert'
             />
             <p className='hidden md:block'>Furry Friend</p>
           </Link>
