@@ -31,19 +31,6 @@ const Footer = () => {
           <Link href={'/privacy'}>개인정보 처리방침</Link>
         </div>
 
-        <div className='flex gap-2'>
-          <Link
-            target='_blank'
-            href='https://icons8.com/icon/IXOBYgTqGhdq/chinchilla'
-          >
-            Chinchilla
-          </Link>
-          icon by
-          <Link target='_blank' href='https://icons8.com'>
-            Icons8
-          </Link>
-        </div>
-
         <div className='w-full flex justify-end gap-2 items-center'>
           <Link
             href={'https://github.com/kkukileon305/furry-friend'}
