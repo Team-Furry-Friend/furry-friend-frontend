@@ -12,6 +12,7 @@ import { Popularity } from '@/types';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import numberFormatter from '@/libs/numberFormatter';
 
 const BannerSwiper = ({ posts }: { posts: Popularity[] }) => {
   const [curIndex, setCurIndex] = useState(0);
@@ -58,7 +59,9 @@ const BannerSwiper = ({ posts }: { posts: Popularity[] }) => {
                   </h4>
                   <p className='text-white'>{getDateDiff(post.regDate)}</p>
                 </div>
-                <p className='font-bold text-white text-xl'>{post.pprice}원</p>
+                <p className='font-bold text-white text-xl'>
+                  {numberFormatter.format(post.pprice)}원
+                </p>
               </div>
             </div>
           </Link>
