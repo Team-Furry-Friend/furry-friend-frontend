@@ -222,7 +222,7 @@ const UploadForm = ({ at, memberId }: UploadFormProps) => {
               message: '내용은 300자 이하로 입력해주세요.',
             },
           })}
-          className='border rounded p-2 focus:outline-none resize-none'
+          className='border rounded p-2 focus:outline-none resize-none h-40'
           placeholder='상품 설명...'
         />
       </label>
