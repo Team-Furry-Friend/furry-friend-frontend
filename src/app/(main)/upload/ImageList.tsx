@@ -26,7 +26,7 @@ const ImageList = ({
   }
 
   return (
-    <ul className='flex gap-4 flex-wrap'>
+    <ul className='flex gap-4 flex-wrap justify-center'>
       {files.map(file => (
         <li
           key={file.name}
