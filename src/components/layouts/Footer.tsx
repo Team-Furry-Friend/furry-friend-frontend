@@ -21,7 +21,7 @@ const Footer = () => {
               alt='logo'
               width={50}
               height={50}
-              className='w-6'
+              className='w-6 dark:invert'
             />
             <p className='block'>Furry Friend</p>
           </div>
