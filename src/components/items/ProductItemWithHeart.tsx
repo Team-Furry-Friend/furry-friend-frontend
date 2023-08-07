@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { DtoList } from '@/types';
 import { AiFillHeart } from 'react-icons/ai';
 import { getDateDiff } from '@/libs/getDateDiff';
+import numberFormatter from '@/libs/numberFormatter';
 
 const ProductItemWithHeart = ({
   item,
@@ -46,7 +47,7 @@ const ProductItemWithHeart = ({
           </p>
           <h4 className='font-bold truncate'>{item.pname}</h4>
         </div>
-        <p className='font-bold'>{item.pprice}원</p>
+        <p className='font-bold'>{numberFormatter.format(item.pprice)}원</p>
         <p className='text-gray-400'>{getDateDiff(item.regDate)}</p>
       </Link>
     </li>

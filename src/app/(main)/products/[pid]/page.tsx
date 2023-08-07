@@ -14,6 +14,7 @@ import { getDateDiff } from '@/libs/getDateDiff';
 import { Metadata } from 'next';
 import ShareBtn from '@/components/buttons/ShareBtn';
 import ChatBtn from '@/app/(main)/products/[pid]/ChatBtn';
+import numberFormatter from '@/libs/numberFormatter';
 
 export const generateMetadata = async ({
   params,
@@ -133,7 +134,7 @@ const Page = async ({ params }: { params: { pid: string } }) => {
         <p>{getDateDiff(detail.regDate)}</p>
       </div>
       <h2 className='font-bold text-2xl'>{detail.pname}</h2>
-      <p className='mb-4'>{detail.pprice}원</p>
+      <p className='mb-4'>{numberFormatter.format(detail.pprice)}원</p>
       {detail.imageDTOList.length !== 0 && (
         <ul className='flex flex-wrap gap-x-2 gap-y-8 md:gap-x-4 md:gap-y-8 justify-center'>
           {detail.imageDTOList.map(img => (

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { DtoList } from '@/types';
 import { getDateDiff } from '@/libs/getDateDiff';
+import numberFormatter from '@/libs/numberFormatter';
 
 const ProductItem = ({ item }: { item: DtoList }) => {
   return (
@@ -30,7 +31,7 @@ const ProductItem = ({ item }: { item: DtoList }) => {
           </p>
           <h4 className='font-bold truncate'>{item.pname}</h4>
         </div>
-        <p className='font-bold'>{item.pprice}원</p>
+        <p className='font-bold'>{numberFormatter.format(item.pprice)}원</p>
         <p className='text-gray-400'>{getDateDiff(item.regDate)}</p>
       </Link>
     </li>
