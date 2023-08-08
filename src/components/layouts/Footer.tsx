@@ -33,7 +33,7 @@ const Footer = () => {
 
         <div className='w-full flex justify-end gap-2 items-center'>
           <Link
-            href={'https://github.com/kkukileon305/furry-friend'}
+            href={'https://github.com/Team-Furry-Friend/furry-friend-frontend'}
             target='_blank'
             className='hover:underline'
           >
