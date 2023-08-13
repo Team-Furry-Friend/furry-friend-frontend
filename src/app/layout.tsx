@@ -10,19 +10,19 @@ const baseFont = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: {
     template: '%s | Furry Friend',
-    default: 'Furry Friend',
+    default: 'Furry Friend - 반려동물 용품 중고 거래 플랫폼',
   },
   description: '반려동물 용품 중고 거래',
   openGraph: {
     title: {
       template: '%s | Furry Friend',
-      default: 'Furry Friend',
+      default: 'Furry Friend - 반려동물 용품 중고 거래 플랫폼',
     },
   },
   twitter: {
     title: {
       template: '%s | Furry Friend',
-      default: 'Furry Friend',
+      default: 'Furry Friend - 반려동물 용품 중고 거래 플랫폼',
     },
   },
 };
