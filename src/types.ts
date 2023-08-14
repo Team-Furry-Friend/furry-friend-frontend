@@ -24,7 +24,7 @@ export interface ProductListResponse {
 }
 
 export interface ProductData {
-  dtoList: DtoList[];
+  dtoList: Product[];
   totalPage: number;
   page: number;
   size: number;
@@ -36,7 +36,7 @@ export interface ProductData {
   del: boolean;
 }
 
-export interface DtoList {
+export interface Product {
   pid: number;
   pcategory: string;
   pname: string;
