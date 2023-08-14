@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { DtoList } from '@/types';
+import { Product } from '@/types';
 import { AiFillHeart } from 'react-icons/ai';
 import { getDateDiff } from '@/libs/getDateDiff';
 import numberFormatter from '@/libs/numberFormatter';
@@ -9,7 +9,7 @@ const ProductItemWithHeart = ({
   item,
   isLike,
 }: {
-  item: DtoList;
+  item: Product;
   isLike: boolean | undefined;
 }) => {
   return (

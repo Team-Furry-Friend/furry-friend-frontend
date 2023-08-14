@@ -1,7 +1,7 @@
 'use client';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { Datum, DtoList } from '@/types';
+import { Datum, Product } from '@/types';
 import ProductItem from '@/components/items/ProductItem';
 import ProductItemWithHeart from '@/components/items/ProductItemWithHeart';
 import { products } from '@/libs/api';
@@ -19,7 +19,7 @@ const InfiniteScroll = ({
   keyword,
   type,
 }: InfiniteScrollProps) => {
-  const { postsGroup, setSpinner } = useInfiniteScroll<DtoList>({
+  const { postsGroup, setSpinner } = useInfiniteScroll<Product>({
     fetcher: (page: number) =>
       products.get({
         page,

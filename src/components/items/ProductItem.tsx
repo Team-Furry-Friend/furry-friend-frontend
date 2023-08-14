@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { DtoList } from '@/types';
+import { Product } from '@/types';
 import { getDateDiff } from '@/libs/getDateDiff';
 import numberFormatter from '@/libs/numberFormatter';
 
-const ProductItem = ({ item }: { item: DtoList }) => {
+const ProductItem = ({ item }: { item: Product }) => {
   return (
     <li className='w-[calc(50%-4px)] md:w-[calc((100%-48px)/4)]'>
       <Link
