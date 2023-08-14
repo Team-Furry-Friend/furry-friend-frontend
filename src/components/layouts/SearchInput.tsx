@@ -17,8 +17,11 @@ const SearchInput = () => {
     clearTimeout(debounce.current);
 
     debounce.current = setTimeout(async () => {
-      if (keyword.length > 0) {
-        const response = await products.get({ page: 1, keyword });
+      if (e.target.value.length > 0) {
+        const response = await products.get({
+          page: 1,
+          keyword: e.target.value,
+        });
 
         setProductList(response);
       }
