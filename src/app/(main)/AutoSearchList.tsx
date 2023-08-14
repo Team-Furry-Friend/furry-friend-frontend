@@ -39,7 +39,7 @@ const AutoSearchList = ({ keyword, productList }: AutoSearchListProps) => {
 
       <Link
         href={`/search/${keyword}`}
-        className='w-full text-center p-2 hover:bg-gray-200 dark:hover:bg-gray-600'
+        className='block w-full text-center p-2 hover:bg-gray-200 dark:hover:bg-gray-600'
       >
         더 보기
       </Link>
