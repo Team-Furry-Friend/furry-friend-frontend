@@ -8,6 +8,7 @@ import { BsChatDots } from 'react-icons/bs';
 import { MdOutlineSell } from 'react-icons/md';
 import { cookies } from 'next/headers';
 import ThemeSwitchBtn from '@/components/buttons/ThemeSwitchBtn';
+import SearchInput from '@/components/layouts/SearchInput';
 
 const font = Bevan({
   weight: '400',
@@ -52,9 +53,11 @@ const Header = () => {
               height={50}
               className='w-8 dark:invert'
             />
-            <p className='hidden md:block'>Furry Friend</p>
+            <p className='hidden search:block'>Furry Friend</p>
           </Link>
         </h1>
+
+        <SearchInput />
 
         <div className='flex items-center h-12 md:h-16'>
           {links.map(linkData => (
