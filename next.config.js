@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['pnfgdtoqziegilxdoirt.supabase.co'],
+    dangerouslyAllowSVG: true,
   },
 };
 
